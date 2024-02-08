@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;
     SpriteRenderer spr;
+    BoxCollider2D coll;
 
     public float xMove, yMove;
     int currentJump;
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         yMove = verticalMove(yMove);
         rb.velocity = new Vector2(xMove, yMove);
 
-        if (yMove < 0)
+        if (yMove < -1)
             shoes.Able();
     }
 
@@ -59,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalMove(float value)
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && currentJump > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && currentJump > 0 && shoes.isLanding)
         {
             value = jumpStrenght;
             shoes.Disable();
@@ -76,11 +77,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             value = 0; //Devolver a su estado original la posible gravedad negativa
-
-            if (Input.GetKeyDown(KeyCode.Space) && currentJump > 0)
-            {
-                value = jumpStrenght;
-            }
         }
 
         return value;
