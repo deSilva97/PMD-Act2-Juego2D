@@ -1,19 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] PlayerShoes shoes;
+    [Space]
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float jumpStrenght = 12;
     [SerializeField] float gravityMultiplier = 2;
     [SerializeField] int numberJumps = 1;
 
-    [SerializeField] bool isLanding = false;
-
     Rigidbody2D rb;
+    SpriteRenderer spr;
 
     public float xMove, yMove;
     int currentJump;
@@ -24,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        spr = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -37,28 +40,47 @@ public class PlayerMovement : MonoBehaviour
         xMove = horizontalMove();
         yMove = verticalMove(yMove);
         rb.velocity = new Vector2(xMove, yMove);
+
+        if (yMove < 0)
+            shoes.Able();
     }
 
     private float horizontalMove()
     {
+        float value = Input.GetAxisRaw("Horizontal");
+
+        if (value < 0)
+            spr.flipX = true;
+        else if(value > 0) 
+            spr.flipX = false;
+
         return Input.GetAxisRaw("Horizontal") * moveSpeed;
     }
     private float verticalMove(float value)
     {
 
-        if (!isLanding)
+        if (Input.GetKeyDown(KeyCode.Space) && currentJump > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && currentJump > 0)
-            {
-                value = jumpStrenght;
-            }
+            value = jumpStrenght;
+            shoes.Disable();
+        }
+
+        if (!shoes.isLanding)
+        {
+            //shoes.setActive(yMove > 0 ? false: true);
+
 
             if (value > -MAX_GRAVITY)
                 value -= Time.deltaTime * gravityScale * gravityMultiplier;
         }
         else
         {
-            value = 0;
+            value = 0; //Devolver a su estado original la posible gravedad negativa
+
+            if (Input.GetKeyDown(KeyCode.Space) && currentJump > 0)
+            {
+                value = jumpStrenght;
+            }
         }
 
         return value;
