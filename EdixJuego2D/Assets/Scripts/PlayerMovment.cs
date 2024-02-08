@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         spr = GetComponent<SpriteRenderer>();
+        coll = GetComponent<BoxCollider2D>();
     }
 
     private void Start()
@@ -43,7 +44,15 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(xMove, yMove);
 
         if (yMove < -1)
+        {
             shoes.Able();
+            coll.isTrigger = false;
+        }
+        else
+        {
+            coll.isTrigger = true;
+        }
+            
     }
 
     private float horizontalMove()
