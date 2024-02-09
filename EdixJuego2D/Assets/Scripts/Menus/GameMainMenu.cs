@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class GameMainMenu : MonoBehaviour
 {
     [Header("Inputs")]
     [SerializeField] KeyCode inputKey;
@@ -29,9 +29,8 @@ public class PauseMenu : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(inputKey))
-            HandleInputs();
-            
-    }
+            HandleInputs();        
+    }    
 
     private void HandleInputs()
     {
@@ -42,13 +41,13 @@ public class PauseMenu : MonoBehaviour
 
     public void Open()
     {
-        Time.timeScale = 0;
+        TimeManager.Pause();
         content.SetActive(true);
     }
 
     public void Close()
     {
-        Time.timeScale = 1;
+        TimeManager.Resume();
         content.SetActive(false);
     } 
 
@@ -65,11 +64,13 @@ public class PauseMenu : MonoBehaviour
     private void HandleNewGame()
     {
         Debug.Log("Nueva partida");
+        GameManager.Instance.ChangeState(GameState.Gameplay);
     }
 
     private void HandleContinue()
-    {
+    {       
         Debug.Log("Continuar partida");
+        Close();
     }
 
     private void HandleExit()

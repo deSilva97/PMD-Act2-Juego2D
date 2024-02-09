@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float jumpStrenght = 12;
     [SerializeField] float gravityMultiplier = 2;
-    [SerializeField] int numberJumps = 1;
+    [SerializeField] int numberJumps = 1;    
 
     Rigidbody2D rb;
     SpriteRenderer spr;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     int currentJump;
 
     const float MAX_GRAVITY = 9.8f;
-    const float gravityScale = 9.8f;
+    const float DISTANCE_TO_RECOVER_COLLISIONS = -1;
 
     private void Awake()
     {
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
         yMove = verticalMove(yMove);
         rb.velocity = new Vector2(xMove, yMove);
 
-        if (yMove < -1)
+        if (yMove < DISTANCE_TO_RECOVER_COLLISIONS)
         {
             shoes.Able();
             coll.isTrigger = false;
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
 
 
             if (value > -MAX_GRAVITY)
-                value -= Time.deltaTime * gravityScale * gravityMultiplier;
+                value -= Time.deltaTime * MAX_GRAVITY * gravityMultiplier;
         }
         else
         {
