@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {   
-    [SerializeField] string detectTag = "tag";
-    [SerializeField] KeyCode inputKey = KeyCode.X;
+    [SerializeField] string detectTag = "tag";    
 
-    private List<IDamageable> damageables;
-
-    public KeyCode getInputkey() => inputKey;
+    private List<IDamageable> damageables;    
 
 
     private void Start()

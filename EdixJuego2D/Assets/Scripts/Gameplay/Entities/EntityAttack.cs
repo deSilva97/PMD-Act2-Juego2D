@@ -36,10 +36,9 @@ public class EntityAttack : MonoBehaviour
 
     public void SetDamageToList(int damage)
     {
-        foreach (IDamageable d in damageables)
+        for (int i = 0; i < damageables.Count; i++)
         {
-            Debug.Log("Haciendo daño a " + d);
-            d.SetDamage(damage);
+            damageables[i].SetDamage(damage);
         }
 
     }

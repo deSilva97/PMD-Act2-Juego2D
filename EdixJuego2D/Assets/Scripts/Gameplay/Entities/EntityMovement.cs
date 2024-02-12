@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EntityMovement : MonoBehaviour
 {
-     [SerializeField] PlayerShoes shoes;
+    [SerializeField] EntityShoes shoes;
     [Space]
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float jumpStrenght = 12;
     [SerializeField] float gravityMultiplier = 2;
-    [SerializeField] int numberJumps = 1;    
+    [SerializeField] int numberJumps = 1;
 
     Rigidbody2D rb;
     //SpriteRenderer spr;
@@ -34,9 +34,9 @@ public class EntityMovement : MonoBehaviour
         rb.gravityScale = 0;
     }
 
-    private void Update()
+    public void Move(float horizontalAxis)
     {
-        xMove = horizontalMove();
+        xMove = horizontalMove(horizontalAxis);
         yMove = verticalMove(yMove);
         rb.velocity = new Vector2(xMove, yMove);
 
@@ -49,37 +49,28 @@ public class EntityMovement : MonoBehaviour
         {
             coll.isTrigger = true;
         }
-            
     }
 
-    private float horizontalMove()
+    private float horizontalMove(float value)
     {
-        float value = Input.GetAxisRaw("Horizontal");
-
         if (value < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
 
             //spr.flipX = true;
             //shoes.transform.localPosition = new Vector3(.1f, 0, 0);
-        }            
-        else if(value > 0)
+        }
+        else if (value > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
             //spr.flipX = false;
             shoes.transform.localPosition = new Vector3(-.1f, 0, 0);
         }
 
-        return Input.GetAxisRaw("Horizontal") * moveSpeed;
+        return value * moveSpeed;
     }
     private float verticalMove(float value)
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) && currentJump > 0 && shoes.isLanding)
-        {
-            value = jumpStrenght;
-            shoes.Disable();
-        }
 
         if (!shoes.isLanding)
         {
@@ -96,4 +87,14 @@ public class EntityMovement : MonoBehaviour
 
         return value;
     }
+
+    public void Jump()
+    {
+        if (/*Input.GetKeyDown(KeyCode.Space) &&*/ currentJump > 0 && shoes.isLanding)
+        {
+            yMove = jumpStrenght;
+            shoes.Disable();
+        }
+    }
+
 }

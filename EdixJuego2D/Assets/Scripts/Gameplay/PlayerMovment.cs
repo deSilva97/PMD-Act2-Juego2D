@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] PlayerShoes shoes;
+    [SerializeField] EntityShoes shoes;
     [Space]
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float jumpStrenght = 12;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = 0;
     }
 
-    private void Update()
+    public void Move()
     {
         xMove = horizontalMove();
         yMove = verticalMove(yMove);
@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
         {
             coll.isTrigger = true;
         }
-            
     }
 
     private float horizontalMove()
@@ -65,8 +64,8 @@ public class PlayerMovement : MonoBehaviour
 
             //spr.flipX = true;
             //shoes.transform.localPosition = new Vector3(.1f, 0, 0);
-        }            
-        else if(value > 0)
+        }
+        else if (value > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
             //spr.flipX = false;
@@ -77,12 +76,6 @@ public class PlayerMovement : MonoBehaviour
     }
     private float verticalMove(float value)
     {
-
-        if (Input.GetKeyDown(KeyCode.Space) && currentJump > 0 && shoes.isLanding)
-        {
-            value = jumpStrenght;
-            shoes.Disable();
-        }
 
         if (!shoes.isLanding)
         {
@@ -98,6 +91,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return value;
+    }
+
+    public void Jump()
+    {
+        if (/*Input.GetKeyDown(KeyCode.Space) &&*/ currentJump > 0 && shoes.isLanding)
+        {
+            yMove = jumpStrenght;
+            shoes.Disable();
+        }
     }
 
 }

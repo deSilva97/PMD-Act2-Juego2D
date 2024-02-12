@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class PlayerShoes : MonoBehaviour
+public class EntityShoes : MonoBehaviour
 {
-
     public bool isLanding { get; private set; }
 
     CircleCollider2D coll;
@@ -39,7 +38,6 @@ public class PlayerShoes : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Los pies han golpeado a " + collision.gameObject.name);
         isLanding = true;
     }
 

@@ -6,10 +6,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
-    [SerializeField] private PlayerAttack myAttack;
+    [Header("Inputs")]
+    [SerializeField] KeyCode inputJump = KeyCode.Space;
+    [SerializeField] KeyCode inputAttack = KeyCode.X;
+
+    [Header("References")]
+    [SerializeField] private EntityMovement myMovment;
+    [SerializeField] private EntityAttack myAttack;
     [SerializeField] private Animator myAnimator;
     
-
+    //Events
     public static Action<int, int> onPlayerLifeChange;
     public static Action onPlayerDead;
     public static Action<int> onCoinsAdd;
@@ -17,8 +23,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     public static Action<int> onChestOpen;
 
 
-    int maxLife = 11;
-
+    [SerializeField] int maxLife = 11;
+    [SerializeField] float reloadTime = 1f;
+    private bool reloading;
 
     public int currentLife { get; private set; }
     public int currentCoins { get; private set; }
@@ -29,12 +36,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Start()
     {
         SetLife(maxLife);
-        SetCoins(0);
-        SetChestOpen(0);
+        GiveCoin(0);
+        ChestIndexOpen(0);
     }
 
     private void Update()
     {
+        Move();
         Attack();
     }
 
@@ -44,19 +52,19 @@ public class PlayerController : MonoBehaviour, IDamageable
         onPlayerLifeChange?.Invoke(currentLife, maxLife);
     }
 
-    public void PickKey()
+    public void GiveKey()
     {
         currentKey = true;
         onKeyPicked?.Invoke();
     }
 
-    public void SetCoins(int value)
+    public void GiveCoin(int value = 1)
     {
-        currentCoins = value;
+        currentCoins += value;
         onCoinsAdd?.Invoke(currentCoins);
     }
 
-    public void SetChestOpen(int value)
+    public void ChestIndexOpen(int value)
     {
         currentChestOpen = value;
         onChestOpen?.Invoke(currentChestOpen);
@@ -76,19 +84,30 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
 
     private void Attack()
-    {
-        
-        if (Input.GetKeyDown(myAttack.getInputkey()))
+    {        
+        if (Input.GetKey(inputAttack) && !reloading)
         {
+            StartCoroutine(Reload(reloadTime));
             myAnimator.SetTrigger("attack");
             myAttack.SetDamageToList(1);
         }
             
     }
+    IEnumerator Reload(float time)
+    {
+        reloading = true;
+        yield return new WaitForSeconds(time);
+        reloading = false;
+    }
 
     private void Move()
     {
-
+        myMovment.Move(Input.GetAxisRaw("Horizontal"));
+        if (Input.GetKeyDown(inputJump))
+            myMovment.Jump();
     }
+
+
+  
 
 }
