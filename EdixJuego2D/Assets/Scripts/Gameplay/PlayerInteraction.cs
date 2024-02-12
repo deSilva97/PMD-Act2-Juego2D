@@ -16,7 +16,7 @@ public class PlayerInteraction : MonoBehaviour
             Item id = pickeable.getItemID();     
             switch (id)
             {
-                case Item.coin: controller.AddCoin();
+                case Item.coin: controller.SetCoins(controller.currentCoins + 1);
                     break;
                 case Item.key: controller.PickKey();
                     break;
