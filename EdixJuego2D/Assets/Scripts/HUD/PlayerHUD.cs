@@ -12,11 +12,15 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] TextMeshProUGUI points;
     [SerializeField] Image key;
     [SerializeField] Image[] chests;
+    [Space]
+    [SerializeField] TextMeshProUGUI differentialPointsText;
+    float differentialTimerPoints;
+    int currentDifferentialPoints;
 
     [Header("Params")]    
     [SerializeField][Range(0, 1)] float alphaChests = .2f;
 
-
+    
     private void OnEnable()
     {
         PlayerController.onPlayerLifeChange += SetLifeBar;
@@ -41,6 +45,20 @@ public class PlayerHUD : MonoBehaviour
             i.color = new Color(i.color.r, i.color.g, i.color.b, alphaChests);
     }
 
+    private void Update()
+    {
+        if(differentialTimerPoints > 0)
+        {
+            differentialTimerPoints -= Time.deltaTime;
+            differentialPointsText.text = "+ " + currentDifferentialPoints;
+        }
+        else
+        {
+            differentialPointsText.text = "";
+            currentDifferentialPoints = 0;
+        }
+    }
+
     private void SetLifeBar(int current, int max)
     {
         float dif = (float)current / max;
@@ -53,6 +71,8 @@ public class PlayerHUD : MonoBehaviour
     private void SetPoints(int value)
     {
         points.text = "x " + value.ToString();
+        differentialTimerPoints = 1;
+        currentDifferentialPoints++;
     }
 
     private void SetChestAlpha(int number)
@@ -66,4 +86,5 @@ public class PlayerHUD : MonoBehaviour
             chests[i].color = new Color(chests[i].color.r, chests[i].color.g, chests[i].color.b, (i < number) ? 1: alphaChests);
         }
     }
+
 }
