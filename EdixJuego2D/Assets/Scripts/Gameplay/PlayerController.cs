@@ -6,6 +6,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
+    [SerializeField] private PlayerAttack myAttack;
+    [SerializeField] private Animator myAnimator;
+    
+
     public static Action<int, int> onPlayerLifeChange;
     public static Action onPlayerDead;
     public static Action<int> onCoinsAdd;
@@ -22,6 +26,17 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public int currentChestOpen { get; private set; }
 
+    private void Start()
+    {
+        SetLife(maxLife);
+        SetCoins(0);
+        SetChestOpen(0);
+    }
+
+    private void Update()
+    {
+        Attack();
+    }
 
     public void SetLife(int value)
     {
@@ -47,19 +62,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         onChestOpen?.Invoke(currentChestOpen);
     }
 
-    private void Start()
-    {
-        SetLife(maxLife);
-        SetCoins(0);
-        SetChestOpen(0);
-        InvokeRepeating("_", 1f, 1f);        
-    }
-
-    private void _()
-    {
-        SetDamage(2);
-    }
-
+  
     public void SetDamage(int value)
     {
         currentLife -= value;
@@ -70,6 +73,22 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
 
         SetLife(currentLife);
+    }
+
+    private void Attack()
+    {
+        
+        if (Input.GetKeyDown(myAttack.getInputkey()))
+        {
+            myAnimator.SetTrigger("attack");
+            myAttack.SetDamageToList(1);
+        }
+            
+    }
+
+    private void Move()
+    {
+
     }
 
 }

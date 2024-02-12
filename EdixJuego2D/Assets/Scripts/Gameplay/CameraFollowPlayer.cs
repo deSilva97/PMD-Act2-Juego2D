@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraFollowPlayer : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer target;
+    [SerializeField] Transform target;
     [Space]
     [SerializeField] float speed = 1;
     [SerializeField] float offsetHorizontal = 1.25f;
@@ -21,7 +21,7 @@ public class CameraFollowPlayer : MonoBehaviour
 
     Vector3 getRelativePosition()
     {
-        Vector3 offset = new Vector3(target.flipX ? -offsetHorizontal : offsetHorizontal, offsetVertical, 0);
+        Vector3 offset = new Vector3(target.localScale.x * offsetHorizontal, offsetVertical, 0);
         return offset;
     }
 

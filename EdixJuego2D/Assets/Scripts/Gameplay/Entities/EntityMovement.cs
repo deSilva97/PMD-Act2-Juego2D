@@ -1,13 +1,10 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class EntityMovement : MonoBehaviour
 {
-    [SerializeField] PlayerShoes shoes;
+     [SerializeField] PlayerShoes shoes;
     [Space]
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float jumpStrenght = 12;
@@ -99,5 +96,4 @@ public class PlayerMovement : MonoBehaviour
 
         return value;
     }
-
 }
