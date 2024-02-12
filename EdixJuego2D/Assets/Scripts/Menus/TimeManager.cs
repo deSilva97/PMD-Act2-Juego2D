@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class TimeManager
 {
-    private static float savedTime = 1;
+    private static float savedTime = 1;    
 
     public static void Pause(float time = 1)
     {
@@ -21,6 +21,8 @@ public static class TimeManager
         if (isPaused())
             Resume();
         else Pause(time);
+
+        
     }
          
 

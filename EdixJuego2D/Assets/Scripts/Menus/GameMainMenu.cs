@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameMainMenu : MonoBehaviour
@@ -64,18 +65,16 @@ public class GameMainMenu : MonoBehaviour
     private void HandleNewGame()
     {
         Debug.Log("Nueva partida");
-        GameManager.Instance.ChangeState(GameState.Gameplay);
+        SceneManager.LoadScene(1);        
     }
 
     private void HandleContinue()
-    {       
-        Debug.Log("Continuar partida");
+    {               
         Close();
     }
 
     private void HandleExit()
-    {
-        Debug.Log("Salir");
+    {        
         Application.Quit();
     }
 

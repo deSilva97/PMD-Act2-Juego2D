@@ -49,7 +49,7 @@ public class PlayerShoes : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {        
         currentColliderTrigger = collision;
     }
 

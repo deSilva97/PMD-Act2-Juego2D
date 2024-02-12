@@ -60,9 +60,15 @@ public class PlayerMovement : MonoBehaviour
         float value = Input.GetAxisRaw("Horizontal");
 
         if (value < 0)
+        {
             spr.flipX = true;
-        else if(value > 0) 
+            shoes.transform.localPosition = new Vector3(.1f, 0, 0);
+        }            
+        else if(value > 0)
+        {
             spr.flipX = false;
+            shoes.transform.localPosition = new Vector3(-.1f, 0, 0);
+        }
 
         return Input.GetAxisRaw("Horizontal") * moveSpeed;
     }
