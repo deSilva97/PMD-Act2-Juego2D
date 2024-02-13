@@ -8,6 +8,13 @@ public class EntityAttack : MonoBehaviour
 
     private List<IDamageable> damageables;
 
+    public bool canAttack()
+    {
+        if (damageables.Count > 0)
+            return true;
+        else return false;
+    }
+
     private void Start()
     {
         damageables = new List<IDamageable>();

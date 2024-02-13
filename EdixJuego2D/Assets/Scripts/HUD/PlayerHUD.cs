@@ -62,10 +62,7 @@ public class PlayerHUD : MonoBehaviour
     private void SetLifeBar(int current, int max)
     {
         float dif = (float)current / max;
-
-        Debug.Log(current + "/" + max + "=" + dif);
         currentLife.fillAmount = dif;
-        
     }
 
     private void SetPoints(int value)

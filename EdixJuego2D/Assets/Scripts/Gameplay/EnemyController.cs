@@ -31,6 +31,12 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if (myAttack.canAttack())
+        {
+            Attack();
+            return;
+        }
+
         if (canMove)
         {
             float xDirection = 0;
@@ -44,22 +50,12 @@ public class EnemyController : MonoBehaviour, IDamageable
             else if (distance > .5f)
             {
                 xDirection = 1;
-
-
-            }
-            else
-            {
-                float yDistance = target.position.y - transform.position.y;
-
-
-                if (yDistance < .5f)
-                {
-                    Attack();
-                }
-
             }
             
             myMovment.Move(xDirection);
+
+
+
         }
     }
 

@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Move()
     {
         myMovment.Move(Input.GetAxisRaw("Horizontal"));
-        if (Input.GetKeyDown(inputJump))
+        if (Input.GetKey(inputJump))
             myMovment.Jump();
     }
 
