@@ -61,6 +61,16 @@ public class PlatformMovemnt : MonoBehaviour
         index = nextIndex;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
+    }
+
     private void OnDrawGizmosSelected()
     {
         if (points == null)

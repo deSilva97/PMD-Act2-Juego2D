@@ -38,12 +38,15 @@ public class EntityShoes : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isLanding = true;
+        isLanding = true;                
+        transform.parent.transform.parent = collision.transform;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isLanding = false;
+        isLanding = false;        
+        transform.parent.transform.parent = null;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
