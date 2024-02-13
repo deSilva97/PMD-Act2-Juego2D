@@ -32,14 +32,12 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        GameManager.onGameWin += () => Destroy(gameObject);
-
-
+        WinManager.onGameWin += DesactivePlayer;
     }
 
     private void OnDisable()
     {
-        GameManager.onGameWin -= () => Destroy(gameObject);
+        WinManager.onGameWin -= DesactivePlayer;
     }
 
     private void Start()
@@ -89,7 +87,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void DestroyGameObject()
     {
         onPlayerDead?.Invoke();
-        GameManager.Lose();
+        WinManager.Instance.Lose();
         Destroy(gameObject);
     }
 
@@ -117,7 +115,11 @@ public class PlayerController : MonoBehaviour, IDamageable
             myMovment.Jump();
     }
 
-
+    private void DesactivePlayer()
+    {
+        isAlive = false;
+        Destroy(gameObject);
+    }
   
 
 }

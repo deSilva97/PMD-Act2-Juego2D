@@ -9,7 +9,6 @@ public class EntityMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 10;
     [SerializeField] float jumpStrenght = 12;
     [SerializeField] float gravityMultiplier = 2;
-    [SerializeField] int numberJumps = 1;
 
     int currentJump;
 

@@ -12,12 +12,12 @@ public class LoseUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.onGameLose += Show;
+        WinManager.onGameLose += Show;
     }
 
     private void OnDisable()
     {
-        GameManager.onGameLose -= Show;
+        WinManager.onGameLose -= Show;
     }
 
     private void Start()

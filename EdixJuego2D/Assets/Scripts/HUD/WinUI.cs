@@ -13,12 +13,12 @@ public class WinUI : MonoBehaviour
 
     private void OnEnable()
     {
-        GameManager.onGameWin += Show;
+        WinManager.onGameWin += Show;
     }
 
     private void OnDisable()
     {
-        GameManager.onGameWin -= Show;
+        WinManager.onGameWin -= Show;
     }
 
     private void Start()

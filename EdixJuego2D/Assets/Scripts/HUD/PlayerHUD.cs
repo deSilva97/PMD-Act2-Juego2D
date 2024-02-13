@@ -25,7 +25,7 @@ public class PlayerHUD : MonoBehaviour
     {
         PlayerController.onPlayerLifeChange += SetLifeBar;
         PlayerManager.onCoinPicked += SetPoints;
-        PlayerManager.onKeyPicked += (ctx) => key.gameObject.SetActive(ctx);
+        PlayerManager.onKeyPicked += ShowKey;
         PlayerManager.onChestOpened += SetChestAlpha;
     }
 
@@ -33,7 +33,7 @@ public class PlayerHUD : MonoBehaviour
     {
         PlayerController.onPlayerLifeChange -= SetLifeBar;
         PlayerManager.onCoinPicked -= SetPoints;
-        PlayerManager.onKeyPicked -= (ctx) => key.gameObject.SetActive(ctx);
+        PlayerManager.onKeyPicked -= ShowKey;
         PlayerManager.onChestOpened -= SetChestAlpha;
     }
 
@@ -82,6 +82,11 @@ public class PlayerHUD : MonoBehaviour
         {
             chests[i].color = new Color(chests[i].color.r, chests[i].color.g, chests[i].color.b, (i < number) ? 1: alphaChests);
         }
+    }
+
+    private void ShowKey(bool value)
+    {
+        key.gameObject.SetActive(value);
     }
 
 }

@@ -31,7 +31,7 @@ public class DoorController : MonoBehaviour
         }
         else
         {
-            GameManager.Win();
+            WinManager.Instance.Win();
             enabled = false;
         }
     }

@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
 
-    public static Action onGameWin;
-    public static Action onGameLose;
 
     private void Awake()
     {
@@ -43,7 +41,5 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void Win() => onGameWin?.Invoke();
-    public static void Lose() => onGameLose?.Invoke();
 
 }
