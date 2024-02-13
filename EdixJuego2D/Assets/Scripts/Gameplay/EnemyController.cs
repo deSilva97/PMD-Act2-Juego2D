@@ -10,9 +10,10 @@ public class EnemyController : MonoBehaviour, IDamageable
     [SerializeField] Animator myAnim;
     [SerializeField] EntityAttack myAttack;
 
-    [SerializeField] Transform target;
     [SerializeField] EnemyHUD myHUD;
 
+
+    Transform target;
     SpriteRenderer spr;
 
     int maxLife = 3;
@@ -20,17 +21,23 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public int currentLife { get; private set; }
 
+    public bool isAlive { get; private set; }
+
     bool canMove;
     bool reloading;
     void Start()
     {              
         currentLife = maxLife;
+        isAlive = true;
 
         EnemyAtRange(FindAnyObjectByType<PlayerController>().transform);
     }
 
     private void Update()
     {
+        if (target == null)
+            return;
+
         if (myAttack.canAttack())
         {
             Attack();
@@ -63,11 +70,16 @@ public class EnemyController : MonoBehaviour, IDamageable
     {
         currentLife -= value;
 
- 
+
         if (currentLife <= 0)
-            Destroy(gameObject);
+            SetDead();
 
         myHUD.SetLifeBar(currentLife, maxLife);
+    }
+
+    public void SetDead(float time = 0)
+    {
+        Destroy(gameObject);
     }
 
     public void EnemyAtRange(Transform target)

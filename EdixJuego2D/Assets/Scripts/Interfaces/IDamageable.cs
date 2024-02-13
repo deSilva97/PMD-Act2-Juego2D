@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    public void SetDamage(int value);    
+    public void SetDamage(int value);
+    public void SetDead(float time);
 }

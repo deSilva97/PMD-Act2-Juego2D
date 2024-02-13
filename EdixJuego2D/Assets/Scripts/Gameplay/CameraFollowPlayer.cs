@@ -23,6 +23,9 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (target == null)
+            return;
+
         if (Vector3.Distance(getTargetPosition(), transform.position) > minDistanceStop)
             position = Vector3.Lerp(transform.position, getTargetPosition() + getRelativePosition(), speed * Time.deltaTime);
 

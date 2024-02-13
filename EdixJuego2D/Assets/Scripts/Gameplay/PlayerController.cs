@@ -33,8 +33,11 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public int currentChestOpen { get; private set; }
 
+    public bool isAlive { get; private set; }
+
     private void Start()
     {
+        isAlive = true;
         SetLife(maxLife);
         GiveCoin(0);
         ChestIndexOpen(0);
@@ -42,8 +45,11 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        Move();
-        Attack();
+        if (!isAlive)
+            return;
+
+            Move();
+            Attack();
     }
 
     public void SetLife(int value)
@@ -74,13 +80,27 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void SetDamage(int value)
     {
         currentLife -= value;
-        if (currentLife < 0)
+        if (currentLife <= 0)
         {
             currentLife = 0;
-            onPlayerDead?.Invoke();
+            SetDead(1f);
         }
 
         SetLife(currentLife);
+    }
+
+    public void SetDead(float time = 0)
+    {
+        isAlive = false;
+
+        if(time > 0)
+            Invoke(nameof(DestroyGameObject), time);
+    }
+
+    public void DestroyGameObject()
+    {
+        onPlayerDead?.Invoke();
+        Destroy(gameObject);
     }
 
     private void Attack()

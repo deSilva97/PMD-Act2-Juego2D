@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EntityAttack : MonoBehaviour
 {
-    [SerializeField] string detectTag = "tag";    
+    [SerializeField] string[] detectTag;    
 
     private List<IDamageable> damageables;
 
@@ -22,7 +22,7 @@ public class EntityAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == detectTag)
+        if (DetectOneOfTheTags(collision.tag))
         {
             IDamageable d = collision.GetComponent<IDamageable>();
             if (d != null)
@@ -33,7 +33,7 @@ public class EntityAttack : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == detectTag)
+        if (DetectOneOfTheTags(collision.tag))
         {
             IDamageable d = collision.GetComponent<IDamageable>();
             if (d != null)
@@ -48,5 +48,13 @@ public class EntityAttack : MonoBehaviour
             damageables[i].SetDamage(damage);
         }
 
+    }
+
+    private bool DetectOneOfTheTags(string tag)
+    {
+        foreach (string str in detectTag)
+            if (str == tag)
+                return true;
+        return false;
     }
 }
