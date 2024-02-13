@@ -17,7 +17,7 @@ public class ChestController : MonoBehaviour, IDamageable
 
     public void SetDead(float time = 0)
     {
-        
+        PlayerManager.Instance.setChests(PlayerManager.Instance.getChests() + 1);
         Destroy(gameObject);
     }
 

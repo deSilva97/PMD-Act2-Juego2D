@@ -4,34 +4,51 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System;
 
-public static class PlayerManager 
+public class PlayerManager : MonoBehaviour
 {
-    public static Action<bool> onKeyPicked;    
-
-    public static bool currentKey { get; private set; }
-
-
-    public static void PickUpCoin()
+    private static PlayerManager instance;
+    public static PlayerManager Instance => instance;
+    private void Awake()
     {
-
+        if (instance == null)
+            instance = this;
+        else Destroy(gameObject);
     }
 
-    public static bool PickUpKey()
-    {
-        if (currentKey)
-            return false;
+    public static Action<bool> onKeyPicked;
+    public static Action<int> onCoinPicked;
+    public static Action<int> onChestOpened;
 
-        currentKey = true;
-        onKeyPicked?.Invoke(currentKey);
-        return true;
+    private bool currentKey;
+    private int currentCoins;
+
+    private int currentChestOpen;
+
+    private void Start()
+    {
+        setKey(false);
+        setCoins(0);
+        setChests(0);
     }
 
-    public static void UseKey()
+    public bool getKey() => currentKey;
+    public void setKey(bool value)
     {
-        currentKey = false;
-        onKeyPicked?.Invoke(currentKey);
+        currentKey = value;
+        onKeyPicked?.Invoke(value);
     }
 
-
+    public int getCoins() => currentCoins;
+    public void setCoins(int value)
+    {
+        currentCoins = value;
+        onCoinPicked?.Invoke(value);
+    }
+    public int getChests() => currentChestOpen;
+    public void setChests(int value)
+    {
+        currentChestOpen = value;
+        onChestOpened?.Invoke(value);
+    }
 
 }

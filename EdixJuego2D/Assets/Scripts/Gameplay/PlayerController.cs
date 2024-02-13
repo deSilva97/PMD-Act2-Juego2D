@@ -17,10 +17,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     
     //Events
     public static Action<int, int> onPlayerLifeChange;
-    public static Action onPlayerDead;
-    public static Action<int> onCoinsAdd;
-    public static Action onKeyPicked;
-    public static Action<int> onChestOpen;
+    public static Action onPlayerDead;        
 
 
     [SerializeField] int maxLife = 11;
@@ -28,52 +25,44 @@ public class PlayerController : MonoBehaviour, IDamageable
     private bool reloading;
 
     public int currentLife { get; private set; }
-    public int currentCoins { get; private set; }
-    public bool currentKey { get; private set; }
-
-    public int currentChestOpen { get; private set; }
+  
 
     public bool isAlive { get; private set; }
+
+
+    private void OnEnable()
+    {
+        GameManager.onGameWin += () => Destroy(gameObject);
+
+
+    }
+
+    private void OnDisable()
+    {
+        GameManager.onGameWin -= () => Destroy(gameObject);
+    }
 
     private void Start()
     {
         isAlive = true;
         SetLife(maxLife);
-        GiveCoin(0);
-        ChestIndexOpen(0);
+
     }
+
 
     private void Update()
     {
         if (!isAlive)
             return;
 
-            Move();
-            Attack();
+        Move();
+        Attack();
     }
 
     public void SetLife(int value)
     {
         currentLife = value;
         onPlayerLifeChange?.Invoke(currentLife, maxLife);
-    }
-
-    public void GiveKey()
-    {
-        currentKey = true;
-        onKeyPicked?.Invoke();
-    }
-
-    public void GiveCoin(int value = 1)
-    {
-        currentCoins += value;
-        onCoinsAdd?.Invoke(currentCoins);
-    }
-
-    public void ChestIndexOpen(int value)
-    {
-        currentChestOpen = value;
-        onChestOpen?.Invoke(currentChestOpen);
     }
 
   
@@ -100,6 +89,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void DestroyGameObject()
     {
         onPlayerDead?.Invoke();
+        GameManager.Lose();
         Destroy(gameObject);
     }
 

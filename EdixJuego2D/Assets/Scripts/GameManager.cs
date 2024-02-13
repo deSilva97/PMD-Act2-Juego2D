@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,10 @@ public class GameManager : MonoBehaviour
 
     private static GameManager instance;
     public static GameManager Instance => instance;
+
+
+    public static Action onGameWin;
+    public static Action onGameLose;
 
     private void Awake()
     {
@@ -37,5 +42,8 @@ public class GameManager : MonoBehaviour
                 break;                
         }
     }
+
+    public static void Win() => onGameWin?.Invoke();
+    public static void Lose() => onGameLose?.Invoke();
 
 }

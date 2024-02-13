@@ -24,17 +24,17 @@ public class PlayerHUD : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.onPlayerLifeChange += SetLifeBar;
-        PlayerController.onCoinsAdd += SetPoints;
-        PlayerController.onKeyPicked += () => key.gameObject.SetActive(true);
-        PlayerController.onChestOpen += SetChestAlpha;
+        PlayerManager.onCoinPicked += SetPoints;
+        PlayerManager.onKeyPicked += (ctx) => key.gameObject.SetActive(ctx);
+        PlayerManager.onChestOpened += SetChestAlpha;
     }
 
     private void OnDisable()
     {
         PlayerController.onPlayerLifeChange -= SetLifeBar;
-        PlayerController.onCoinsAdd -= SetPoints;
-        PlayerController.onKeyPicked -= () => key.gameObject.SetActive(true);
-        PlayerController.onChestOpen -= SetChestAlpha;
+        PlayerManager.onCoinPicked -= SetPoints;
+        PlayerManager.onKeyPicked -= (ctx) => key.gameObject.SetActive(ctx);
+        PlayerManager.onChestOpened -= SetChestAlpha;
     }
 
     private void Start()

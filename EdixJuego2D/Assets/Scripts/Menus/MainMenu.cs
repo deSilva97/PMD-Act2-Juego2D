@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        HandlePlay();
+        Invoke(nameof(HandlePlay), 1f);
     }
 
     private void HandlePlay()

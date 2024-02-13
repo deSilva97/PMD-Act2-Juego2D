@@ -9,22 +9,22 @@ public class PlayerInteraction : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log(collision);
-
+        /*
         IPickeable pickeable = collision.GetComponent<IPickeable>();
         if (pickeable != null)
         {
             Item id = pickeable.getItemID();     
             switch (id)
             {
-                case Item.coin: controller.GiveCoin(1);
+                case Item.coin: PlayerManager.Instance.setCoins(PlayerManager.Instance.getCoins() + 1);
                     break;
-                case Item.key: controller.GiveKey();
+                case Item.key: PlayerManager.Instance.setKey(true);
                     break;
                 default: 
                     Debug.LogWarning("No hay un caso definido para esta interacción: " + collision.gameObject.name);
                     break;
             }
         }
-            
+            */
     }
 }
