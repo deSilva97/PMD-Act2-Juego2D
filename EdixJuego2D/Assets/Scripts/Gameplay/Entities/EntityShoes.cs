@@ -7,8 +7,18 @@ public class EntityShoes : MonoBehaviour
 {
     public bool isLanding { get; private set; }
 
+    bool reload = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
-    {        
+    {
+        
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (reload)
+            return;
+
         isLanding = true;
     }
 
@@ -17,5 +27,15 @@ public class EntityShoes : MonoBehaviour
         isLanding = false;
     }
 
-    public void ForeceLandOff() => isLanding = false;
+    public void ForeceLandOff()
+    {         
+        isLanding = false;
+        reload = true;
+        Invoke("LandOn", .15f);
+    }
+
+    public void LandOn()
+    {
+        reload = false;
+    }
 }

@@ -25,7 +25,6 @@ public class EnemyHUD : MonoBehaviour
 
         float dif = (float)current / max;
 
-        Debug.Log(current + "/" + max + "=" + dif);
         lifebar_front.fillAmount = dif;
     }
     public void SetNotify(string chr = "")

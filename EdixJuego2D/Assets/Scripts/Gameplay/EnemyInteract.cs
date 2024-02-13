@@ -9,20 +9,6 @@ public class EnemyInteract : MonoBehaviour
     bool canClimb = true;
     [SerializeField] float timeTryClimb = 1f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!canClimb)
-            return;
-
-        if (collision.tag.Equals("Ground") || collision.tag.Equals("Obstacle") || collision.tag.Equals("Platform"))
-        {
-            Debug.Log("Va a saltar: " + collision.gameObject);
-            controller.Climb();
-            StartCoroutine(Reload());
-
-        }
-    }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (!canClimb)
@@ -30,7 +16,6 @@ public class EnemyInteract : MonoBehaviour
 
         if (collision.tag.Equals("Ground") || collision.tag.Equals("Obstacle") || collision.tag.Equals("Platform"))
         {
-            Debug.Log("Va a saltar: " + collision.gameObject);
             controller.Climb();
             StartCoroutine(Reload());
 

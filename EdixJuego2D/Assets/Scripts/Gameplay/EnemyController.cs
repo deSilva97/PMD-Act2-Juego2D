@@ -42,12 +42,12 @@ public class EnemyController : MonoBehaviour, IDamageable
             float xDirection = 0;
             float distance = (target.position.x - transform.position.x);
 
-            if (distance < -.5f)
+            if (distance < -1f)
             {
                 xDirection = -1;
 
             }             
-            else if (distance > .5f)
+            else if (distance > 1f)
             {
                 xDirection = 1;
             }

@@ -11,32 +11,30 @@ public class EntityMovement : MonoBehaviour
     [SerializeField] float gravityMultiplier = 2;
     [SerializeField] int numberJumps = 1;
 
-    Rigidbody2D rb;
-    BoxCollider2D coll;
-
-    public float xMove, yMove;
     int currentJump;
 
+    public Rigidbody2D myRigidbody { get; private set; }
+
+    float xMove, yMove;
+
     const float MAX_GRAVITY = 9.8f;
-    const float DISTANCE_TO_RECOVER_COLLISIONS = -1;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<BoxCollider2D>();
+        myRigidbody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        currentJump = numberJumps;
-        rb.gravityScale = 1;
+        myRigidbody.gravityScale = 1;
+        currentJump = 1;
     }
 
     public void Move(float horizontalAxis)
     {
         xMove = horizontalMove(horizontalAxis);
         yMove = verticalMove(yMove);
-        rb.velocity = new Vector2(xMove,  yMove);
+        myRigidbody.velocity = new Vector2(xMove,  yMove);
     }
 
     private float horizontalMove(float value)
@@ -62,7 +60,8 @@ public class EntityMovement : MonoBehaviour
         }
         else
         {
-            value = -rb.gravityScale; //Devolver a su estado original la posible gravedad negativa
+            currentJump = 1;
+            value = -myRigidbody.gravityScale; //Devolver a su estado original la posible gravedad negativa
         }
 
         return value;
@@ -72,6 +71,7 @@ public class EntityMovement : MonoBehaviour
     {
         if (currentJump > 0 && shoes.isLanding)
         {
+            currentJump--;
             yMove = jumpStrenght;
             shoes.ForeceLandOff();
         }
