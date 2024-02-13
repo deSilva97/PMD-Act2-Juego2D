@@ -6,17 +6,36 @@ using UnityEngine;
 public class CameraFollowPlayer : MonoBehaviour
 {
     [SerializeField] Transform target;
+    [SerializeField] Vector2 xLimits;
+    [SerializeField] Vector2 yLimits;
     [Space]
     [SerializeField] float speed = 1;
     [SerializeField] float offsetHorizontal = 1.25f;
     [SerializeField] float offsetVertical = 1.5f;
-    [SerializeField] float minDistanceStop = .5f;    
+    [SerializeField] float minDistanceStop = .5f;
+
+    Vector3 position;
+
+    private void Update()
+    {
+        
+    }
 
     private void FixedUpdate()
     {
         if (Vector3.Distance(getTargetPosition(), transform.position) > minDistanceStop)
-            transform.position = Vector3.Lerp(transform.position, getTargetPosition() + getRelativePosition(), speed * Time.deltaTime);
-            
+            position = Vector3.Lerp(transform.position, getTargetPosition() + getRelativePosition(), speed * Time.deltaTime);
+
+        position.x = Mathf.Clamp(position.x, xLimits.x, xLimits.y);
+        position.y = Mathf.Clamp(position.y, yLimits.x, yLimits.y);
+        position.z = -10;
+
+        transform.position = position;
+    }
+
+    private void LateUpdate()
+    {
+      
     }
 
     Vector3 getRelativePosition()
