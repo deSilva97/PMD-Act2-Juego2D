@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 
 public class VolumeUI : MonoBehaviour
 {
+    public event Action<float> onVolumeChange;
+
     [SerializeField] Button muteVolume;
     [SerializeField] Button fullVolume;
     [SerializeField] Slider slider;
@@ -13,6 +16,8 @@ public class VolumeUI : MonoBehaviour
 
     private void Start()
     {
+        slider.onValueChanged.AddListener((v) => onVolumeChange?.Invoke(v));
+
         muteVolume.onClick.AddListener(() => slider.value = 0);
         fullVolume.onClick.AddListener(() => slider.value = 1);
     }

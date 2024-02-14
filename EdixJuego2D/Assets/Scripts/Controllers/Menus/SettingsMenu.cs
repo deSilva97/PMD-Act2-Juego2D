@@ -27,7 +27,8 @@ public class SettingsMenu : MonoBehaviour
 
     private void Start()
     {
-   
+        musicUI.onVolumeChange += (ctx) => AudioManager.Instance.SetMusicVolume(ctx); 
+        soundsUI.onVolumeChange += (ctx) => AudioManager.Instance.SetSFXVolume(ctx); 
 
         currentInstance = this;
         Close();
@@ -38,14 +39,18 @@ public class SettingsMenu : MonoBehaviour
         lastContent = returnContent;
 
         content.SetActive(true);
-        musicUI.Open(SoundManager.currentMusicVolume);
-        soundsUI.Open(SoundManager.currentSoundVolume);
+        musicUI.Open(AudioManager.LoadMusicVolume());
+        soundsUI.Open(AudioManager.LoadSFXVolume());
     }
 
     public void SaveAndClose()
     {
-        SoundManager.currentMusicVolume = musicUI.GetSliderValue();
-        SoundManager.currentSoundVolume = soundsUI.GetSliderValue();
+        //SoundManager.currentMusicVolume = musicUI.GetSliderValue();
+        //SoundManager.currentSoundVolume = soundsUI.GetSliderValue();
+
+        AudioManager.SaveMusicVolume(musicUI.GetSliderValue());
+        AudioManager.SaveSFXVolume(soundsUI.GetSliderValue());
+
         Close();
     }
 
