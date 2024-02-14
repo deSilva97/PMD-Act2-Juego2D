@@ -10,6 +10,7 @@ public class PauseMenu : PausableMenu
     [Header("References")]
     [SerializeField] Button newGameButton;
     [SerializeField] Button continueGameButton;
+    [SerializeField] Button settingsButton;
     [SerializeField] Button exitButton;
     protected new void Start()
     {
@@ -34,6 +35,7 @@ public class PauseMenu : PausableMenu
     {
         newGameButton.onClick.AddListener(HandleNewGame);
         continueGameButton.onClick.AddListener(HandleContinue);
+        settingsButton.onClick.AddListener(HandleSettings);
         exitButton.onClick.AddListener(HandleExit);
     }
 
@@ -47,6 +49,11 @@ public class PauseMenu : PausableMenu
     {
         isOpen = false;
         Close();
+    }
+
+    private void HandleSettings()
+    {
+        SettingsMenu.OpenSettings(content);
     }
 
     private void HandleExit()
