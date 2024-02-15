@@ -44,11 +44,13 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        isAlive = true;
-        SetLife(maxLife);
+        myMovment.SetMoveSpeed(5);
+        myMovment.SetJumpStrength(8);
 
         myMovment.onEntityJump = onPlayerJump;
         myAttack.onEntityAttack = onPlayerAttack;
+
+        ReSpawn();
     }
 
 
@@ -59,6 +61,13 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         Move();
         Attack();
+    }
+
+    private void ReSpawn()
+    {
+        transform.position = new Vector3(0,0, transform.position.z);
+        isAlive = true;
+        SetLife(maxLife);
     }
 
     public void SetLife(int value)
@@ -82,13 +91,23 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void SetDead(float time = 0)
     {
-        Debug.Log(gameObject.name + " ha muerto ");
-        isAlive = false;
-        
-        if(time > 0)
-            Invoke(nameof(DestroyGameObject), time);
+        int nLives = PlayerManager.Instance.getExtraLifes();
+        nLives--;
 
-        EndGameManager.Instance.Lose();
+        if(nLives < 0)
+        {
+            EndGameManager.Instance.Lose();
+            
+            isAlive = false;
+
+            if (time > 0)
+                Invoke(nameof(DestroyGameObject), time);
+        }
+        else
+        {
+            PlayerManager.Instance.setExtraLifes(nLives);
+            ReSpawn();
+        }
     }
 
     public void DestroyGameObject()
@@ -105,7 +124,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
             StartCoroutine(Reload(reloadTime));
             myAnimator.SetTrigger("attack");
-            myAttack.SetDamageToList(1);
+            myAttack.SetDamageToList(1 * (int)GamePlayerSettings.currentAttackDamage);
         }
             
     }

@@ -16,17 +16,22 @@ public class PlayerManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    [SerializeField] int extraLifes = 3;
+
+    private int currentExtraLifes;
+    private bool currentKey;
+    private int currentCoins;
+    private int currentChestOpen;
+
+    public static event Action<int> onExtraLifesChanges;
     public static event Action<int> onLifesChanges;
     public static event Action<bool> onKeyPicked;
     public static event Action<int> onCoinPicked;
     public static event Action<int> onChestOpened;
 
-    private bool currentKey;
-    private int currentCoins;
-    private int currentChestOpen;    
-
     private void Start()
     {
+        setExtraLifes(extraLifes);
         setKey(false);
         setCoins(0);
         setChests(0);
@@ -50,6 +55,13 @@ public class PlayerManager : MonoBehaviour
     {
         currentChestOpen = value;
         onChestOpened?.Invoke(value);
+    }
+
+    public int getExtraLifes() => currentExtraLifes;
+    public void setExtraLifes(int value)
+    {
+        currentExtraLifes = value;
+        onExtraLifesChanges.Invoke(value);
     }
 
 }

@@ -7,9 +7,10 @@ public class EntityMovement : MonoBehaviour
 {
     [SerializeField] EntityShoes shoes;
     [Space]
-    [SerializeField] float moveSpeed = 10;
-    [SerializeField] float jumpStrenght = 12;
-    [SerializeField] float gravityMultiplier = 2;
+    
+    float moveSpeed = 10;
+    float jumpStrength = 12;
+    float gravityMultiplier = 2;
 
     int currentJump;
 
@@ -20,6 +21,17 @@ public class EntityMovement : MonoBehaviour
     const float MAX_GRAVITY = 9.8f;
 
     public System.Action onEntityJump;
+
+    public void SetMoveSpeed(float value)
+    {
+        moveSpeed = value;
+    }
+
+    public void SetJumpStrength(float value)
+    {
+        jumpStrength = value;
+    }
+
 
     private void Awake()
     {
@@ -74,7 +86,7 @@ public class EntityMovement : MonoBehaviour
         if (currentJump > 0 && shoes.isLanding)
         {
             currentJump--;
-            yMove = jumpStrenght;
+            yMove = jumpStrength;
             shoes.ForeceLandOff();
             onEntityJump?.Invoke();
         }

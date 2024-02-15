@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a0672651bfbb440bbff28856303bb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myData: {fileID: 11400000, guid: 8de9d55bee80e5e4f94c276a5044152d, type: 2}
   myMovment: {fileID: 2564663694518357644}
   myAnim: {fileID: 5948186401196988677}
   myAttack: {fileID: 967930206603466186}
@@ -266,9 +267,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shoes: {fileID: 509746818900663756}
-  moveSpeed: 2
-  jumpStrenght: 8
-  gravityMultiplier: 2
 --- !u!1 &998983802766903309
 GameObject:
   m_ObjectHideFlags: 0

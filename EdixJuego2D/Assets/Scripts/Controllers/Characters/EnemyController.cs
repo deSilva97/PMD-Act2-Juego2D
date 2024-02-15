@@ -6,18 +6,16 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamageable 
 {
+    [SerializeField] EnemyData myData;
+    [Space]
     [SerializeField] EntityMovement myMovment;
     [SerializeField] Animator myAnim;
     [SerializeField] EntityAttack myAttack;
 
     [SerializeField] EnemyHUD myHUD;
 
-
     Transform target;
     SpriteRenderer spr;
-
-    int maxLife = 3;
-    [SerializeField] float reloadTime = 0.25f;
 
     public int currentLife { get; private set; }
 
@@ -33,7 +31,9 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     void Start()
     {              
-        currentLife = maxLife;
+        currentLife = myData.Health;
+        myMovment.SetMoveSpeed(myData.MoveSpeed); 
+        myMovment.SetJumpStrength(myData.JumpStrength); 
         isAlive = true;
 
         EnemyAtRange(FindAnyObjectByType<PlayerController>().transform);
@@ -93,12 +93,13 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (currentLife <= 0)
             SetDead();
 
-        myHUD.SetLifeBar(currentLife, maxLife);
+        myHUD.SetLifeBar(currentLife, myData.Health);
     }
 
     public void SetDead(float time = 0)
     {
         onEnemyDie?.Invoke(this);
+        PlayerManager.Instance.setCoins(PlayerManager.Instance.getCoins() + myData.Points);
         Destroy(gameObject);
     }
 
@@ -124,9 +125,9 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (reloading)
             return;        
 
-        StartCoroutine(Reload(reloadTime));
+        StartCoroutine(Reload(myData.IntervalAttack));
         myAnim.SetTrigger("attack");
-        myAttack.SetDamageToList(1);
+        myAttack.SetDamageToList(myData.Damage);
     }
 
     IEnumerator Reload(float time)
