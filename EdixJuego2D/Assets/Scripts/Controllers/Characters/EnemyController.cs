@@ -29,6 +29,8 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public event Action<EnemyController> onEnemyDie;
 
+    const float MIN_DISTANCE_STOP = .5f;
+
     void Start()
     {              
         currentLife = maxLife;
@@ -51,18 +53,36 @@ public class EnemyController : MonoBehaviour, IDamageable
         if (canMove)
         {
             float xDirection = 0;
-            float distance = !climbing ? (target.position.x - transform.position.x) : 0;
+            //float distance = !climbing ? (target.position.x - transform.position.x) : 0;
+            float distance = (target.position.x - transform.position.x);
 
-            if (distance < -1f)
+            if (distance < -MIN_DISTANCE_STOP)
             {
                 xDirection = -1;
+                transform.localScale = new Vector3(-1, 1, 1);
 
             }             
-            else if (distance > 1f)
+            else if (distance > MIN_DISTANCE_STOP)
             {
                 xDirection = 1;
+                transform.localScale = new Vector3(1, 1, 1);
             }
             
+            if(climbing)
+            {
+                xDirection = 0;
+            }
+
+            Debug.Log("Moving: " + xDirection);
+            /*
+            if(xDirection == 0)
+            {
+                if((target.position.x - transform.position.x) < 0)
+                    transform.localScale = new Vector3(-1, 1, 1);
+                else if((target.position.x - transform.position.x) > 0)
+                    transform.localScale = new Vector3(1, 1, 1);
+            }
+            */
             myMovment.Move(xDirection);
         }
     }
