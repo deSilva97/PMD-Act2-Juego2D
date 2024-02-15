@@ -11665,7 +11665,11 @@ PrefabInstance:
       objectReference: {fileID: 2063632377}
     - target: {fileID: 2568907428484719765, guid: 4b1dd4d58abb720459a512faa2d1f4fa, type: 3}
       propertyPath: xLimits.y
-      value: 7
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2568907428484719765, guid: 4b1dd4d58abb720459a512faa2d1f4fa, type: 3}
+      propertyPath: yLimits.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5065663423409875956, guid: 4b1dd4d58abb720459a512faa2d1f4fa, type: 3}
       propertyPath: m_audioClip
