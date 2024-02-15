@@ -16,9 +16,11 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private Animator myAnimator;
     
     //Events
-    public static Action<int, int> onPlayerLifeChange;
-    public static Action onPlayerDead;        
+    public static event Action<int, int> onPlayerLifeChange;
+    public static event Action onPlayerDead;        
 
+    public event Action onPlayerJump;
+    public event Action onPlayerAttack;
 
     [SerializeField] int maxLife = 11;
     [SerializeField] float reloadTime = 1f;
@@ -26,13 +28,13 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public int currentLife { get; private set; }
   
-
     public bool isAlive { get; private set; }
 
 
     private void OnEnable()
     {
         EndGameManager.onGameWin += DesactivePlayer;
+        
     }
 
     private void OnDisable()
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         isAlive = true;
         SetLife(maxLife);
 
+        myMovment.onEntityJump = onPlayerJump;
+        myAttack.onEntityAttack = onPlayerAttack;
     }
 
 
@@ -97,6 +101,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     {        
         if (Input.GetKey(inputAttack) && !reloading)
         {
+            onPlayerAttack?.Invoke();
+
             StartCoroutine(Reload(reloadTime));
             myAnimator.SetTrigger("attack");
             myAttack.SetDamageToList(1);
@@ -114,7 +120,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         myMovment.Move(Input.GetAxisRaw("Horizontal"));
         if (Input.GetKey(inputJump))
+        {
             myMovment.Jump();
+        }
+            
     }
 
     private void DesactivePlayer()

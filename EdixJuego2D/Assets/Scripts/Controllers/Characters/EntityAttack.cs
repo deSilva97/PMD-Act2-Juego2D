@@ -8,6 +8,8 @@ public class EntityAttack : MonoBehaviour
 
     private List<IDamageable> damageables;
 
+    public System.Action onEntityAttack;
+
     public bool canAttack()
     {
         if (damageables.Count > 0)
@@ -43,6 +45,8 @@ public class EntityAttack : MonoBehaviour
 
     public void SetDamageToList(int damage)
     {
+        onEntityAttack?.Invoke();
+
         for (int i = 0; i < damageables.Count; i++)
         {
             damageables[i].SetDamage(damage);

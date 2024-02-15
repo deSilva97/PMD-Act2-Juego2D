@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EntityMovement : MonoBehaviour
@@ -17,6 +18,8 @@ public class EntityMovement : MonoBehaviour
     float xMove, yMove;
 
     const float MAX_GRAVITY = 9.8f;
+
+    public System.Action onEntityJump;
 
     private void Awake()
     {
@@ -73,6 +76,7 @@ public class EntityMovement : MonoBehaviour
             currentJump--;
             yMove = jumpStrenght;
             shoes.ForeceLandOff();
+            onEntityJump?.Invoke();
         }
     }
 

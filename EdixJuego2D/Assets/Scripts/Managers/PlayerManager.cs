@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -15,13 +16,13 @@ public class PlayerManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    public static Action<bool> onKeyPicked;
-    public static Action<int> onCoinPicked;
-    public static Action<int> onChestOpened;
+    public static event Action<int> onLifesChanges;
+    public static event Action<bool> onKeyPicked;
+    public static event Action<int> onCoinPicked;
+    public static event Action<int> onChestOpened;
 
     private bool currentKey;
     private int currentCoins;
-
     private int currentChestOpen;
 
     private void Start()

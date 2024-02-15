@@ -9,6 +9,8 @@ public class EntityShoes : MonoBehaviour
 
     bool reload = false;
 
+    public event System.Action onLand;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         

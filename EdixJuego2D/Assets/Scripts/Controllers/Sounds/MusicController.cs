@@ -41,32 +41,27 @@ public class MusicController : MonoBehaviour
     private void Start()
     {
         canPlay = true;
-       
 
         source.loop = false;
 
-        if (source.clip != null)
-            source.clip = normalClips[index];
-
-        Play(0);
+        index = 0;
+        Play(index);
+        StartCoroutine(LoopMusic());
     }
 
-    private void Update()
+    IEnumerator LoopMusic()
     {
-        if (!canPlay)
-            return;
-
-        if (source.isPlaying)
-            return;
+        while (source.isPlaying)
+            yield return new WaitForEndOfFrame();
 
         source.Stop();
 
-        timer += Time.deltaTime;
-        if (timer < timeBetweenClips)
-            return;
+        yield return new WaitForSeconds(timeBetweenClips);
 
         Play(NextArrayIndex());
+
     }
+    
 
     public void Play(int next, float time = 0)
     {
@@ -93,7 +88,15 @@ public class MusicController : MonoBehaviour
 
     public void StopAndPlay(AudioClip clip)
     {
-        source.loop = !canPlay;
-        source.clip = clip;
+        Debug.Log("Se va a: " + clip.name);
+        StopAllCoroutines();
+
+        if (clip != null)
+        {
+            source.clip = clip;
+            source.Play();
+        }
+        else source.Stop();
+
     }
 }

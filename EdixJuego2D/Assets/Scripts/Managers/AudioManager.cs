@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
 
     const string MIXER_MUSIC = "MusicVolume";
     const string MIXER_SFX = "SFXVolume";
+
+    
     private void Awake()
     {
         if (instance == null)
