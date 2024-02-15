@@ -32,9 +32,9 @@ public class EntityMovement : MonoBehaviour
         currentJump = 1;
     }
 
-    public void Move(float horizontalAxis)
+    public void Move(float horizontalAxis, float multiplier = 1)
     {
-        xMove = horizontalMove(horizontalAxis);
+        xMove = horizontalMove(horizontalAxis) * multiplier;
         yMove = verticalMove(yMove);
         myRigidbody.velocity = new Vector2(xMove,  yMove);
     }

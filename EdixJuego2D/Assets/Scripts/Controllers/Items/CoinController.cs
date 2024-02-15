@@ -2,33 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinController : MonoBehaviour, IPickeable
+
+public class CoinController : Pickeable
 {
     [SerializeField] int value = 1;
 
-    Collider2D coll;
-    AudioSource source;
-    SpriteRenderer spr;
-
-    private void Awake()
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        coll = GetComponent<Collider2D>();
-        source = GetComponent<AudioSource>();
-        spr = GetComponent<SpriteRenderer>();
+        PickUp();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public new void PickUp()
     {
-        pick();
-    }
-
-    public void pick()
-    {
-
-        coll.enabled = false; 
-        source.Play();
-        spr.sprite = null;
-        
+        base.PickUp();
         PlayerManager.Instance.setCoins(PlayerManager.Instance.getCoins() + value);
     }
 }

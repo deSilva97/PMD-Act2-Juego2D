@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Move()
     {
-        myMovment.Move(Input.GetAxisRaw("Horizontal"));
+        myMovment.Move(Input.GetAxisRaw("Horizontal"), GamePlayerSettings.currentMoveSpeedMultiplier);
         if (Input.GetKey(inputJump))
         {
             myMovment.Jump();

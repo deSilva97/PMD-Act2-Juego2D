@@ -23,7 +23,7 @@ public class PlayerManager : MonoBehaviour
 
     private bool currentKey;
     private int currentCoins;
-    private int currentChestOpen;
+    private int currentChestOpen;    
 
     private void Start()
     {
