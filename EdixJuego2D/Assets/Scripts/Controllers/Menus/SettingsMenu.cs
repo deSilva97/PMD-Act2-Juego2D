@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsMenu : MonoBehaviour
+public class SettingsMenu : Menu
 {
-    static SettingsMenu currentInstance;    
-    public static void OpenSettings(GameObject returnContent) => currentInstance.Open(returnContent);
-
     [SerializeField] GameObject content;
-
-    private GameObject lastContent;
 
     [SerializeField] Button saveButton;
     [SerializeField] Button cancelButton;
@@ -28,37 +23,31 @@ public class SettingsMenu : MonoBehaviour
     private void Start()
     {
         musicUI.onVolumeChange += (ctx) => AudioManager.Instance.SetMusicVolume(ctx); 
-        soundsUI.onVolumeChange += (ctx) => AudioManager.Instance.SetSFXVolume(ctx); 
+        soundsUI.onVolumeChange += (ctx) => AudioManager.Instance.SetSFXVolume(ctx);
 
-        currentInstance = this;
         Close();
     }
 
-    public void Open(GameObject returnContent)
-    {
-        lastContent = returnContent;
-
-        content.SetActive(true);
-        musicUI.Open(AudioManager.LoadMusicVolume());
-        soundsUI.Open(AudioManager.LoadSFXVolume());
-    }
+   
 
     public void SaveAndClose()
     {
-        //SoundManager.currentMusicVolume = musicUI.GetSliderValue();
-        //SoundManager.currentSoundVolume = soundsUI.GetSliderValue();
-
         AudioManager.SaveMusicVolume(musicUI.GetSliderValue());
         AudioManager.SaveSFXVolume(soundsUI.GetSliderValue());
 
         Close();
     }
+    public override void Open()
+    {
+        content.SetActive(true);
+        musicUI.Open(AudioManager.LoadMusicVolume());
+        soundsUI.Open(AudioManager.LoadSFXVolume());
+    }
 
-    public void Close()
+    public override void Close()
     {
         content.SetActive(false);
-        if(lastContent != null)
-            lastContent.SetActive(true);
+        MenuHandler.returnMenu();
     }
 
 }

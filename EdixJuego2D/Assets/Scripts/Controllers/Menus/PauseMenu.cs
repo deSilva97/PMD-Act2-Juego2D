@@ -15,7 +15,9 @@ public class PauseMenu : PausableMenu
     protected new void Start()
     {
         base.Start();
+        
         setListeners();
+        
         Close();
     }
 
@@ -53,7 +55,7 @@ public class PauseMenu : PausableMenu
 
     private void HandleSettings()
     {
-        SettingsMenu.OpenSettings(content);
+        MenuHandler.changeMenu(FindAnyObjectByType<SettingsMenu>(), this, true);
     }
 
     private void HandleExit()

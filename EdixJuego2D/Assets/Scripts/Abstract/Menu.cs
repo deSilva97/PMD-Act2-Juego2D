@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class PausableMenu : MonoBehaviour
+public abstract class Menu : MonoBehaviour
+{
+    public abstract void Open();
+    public abstract void Close();    
+}
+
+public abstract class PausableMenu : Menu
 {
     [Header("Inputs")]
     [SerializeField] protected KeyCode inputKey;
     [SerializeField] protected Button inputButton;
 
     [Header("Content")]
-    [SerializeField] protected GameObject content;    
+    [SerializeField] protected GameObject content;
 
     public bool isOpen { get; protected set; }
 
     protected void Start()
     {
-        if(inputButton != null)
+        if (inputButton != null)
             inputButton.onClick.AddListener(HandleInputs);
     }
 
@@ -35,6 +41,6 @@ public abstract class PausableMenu : MonoBehaviour
         isOpen = !isOpen;
     }
 
-    public abstract void Open();
-    public abstract void Close();
+    public override abstract void Open();
+    public override abstract void Close();
 }
