@@ -73,7 +73,6 @@ public class EnemyController : MonoBehaviour, IDamageable
                 xDirection = 0;
             }
 
-            Debug.Log("Moving: " + xDirection);
             /*
             if(xDirection == 0)
             {

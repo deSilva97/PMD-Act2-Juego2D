@@ -63,12 +63,15 @@ public class PlatformMovemnt : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
+        EntityMovement instance = collision.collider.GetComponent<EntityMovement>();
+        if (instance != null)
+            instance.transform.parent = transform;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-
+        if(collision.collider != null)
+            collision.transform.parent = null;
     }
 
     private void OnDrawGizmosSelected()
