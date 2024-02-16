@@ -26,4 +26,5 @@ public static class MenuHandler
         savedToBackMenu = null;
         changeMenu(aux, from, returnable);        
     }
+
 }

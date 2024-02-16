@@ -12,7 +12,7 @@ public class MainMenu : MonoBehaviour
 
     void Start()
     {
-        playButton.onClick.AddListener(() => SceneManager.LoadScene(1));
+        playButton.onClick.AddListener(() => MenuHandler.changeMenu(FindAnyObjectByType<LevelMenu>()));
         optionsButton.onClick.AddListener(() => MenuHandler.changeMenu(FindObjectOfType<SettingsMenu>()));
         exitButton.onClick.AddListener(() => Application.Quit());
     }

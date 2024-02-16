@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour, IDamageable
   
     public bool isAlive { get; private set; }
 
+    Vector3 respawnPositon;
 
     private void OnEnable()
     {
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         myMovment.onEntityJump = onPlayerJump;
         myAttack.onEntityAttack = onPlayerAttack;
 
+        respawnPositon = transform.position;
         ReSpawn();
     }
 
@@ -65,9 +67,10 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void ReSpawn()
     {
-        transform.position = new Vector3(0,0, transform.position.z);
+        transform.position = respawnPositon;
         isAlive = true;
         SetLife(maxLife);
+        //SceneController.Instance.LoadActiveScene();
     }
 
     public void SetLife(int value)

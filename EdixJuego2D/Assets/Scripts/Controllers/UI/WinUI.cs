@@ -25,8 +25,9 @@ public class WinUI : MonoBehaviour
 
     private void Start()
     {
-        continueButton.onClick.AddListener(() => GameManager.Instance.ChangeState(GameState.Main));
-        restartButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
+
+        continueButton.onClick.AddListener(() => SceneController.Instance.LoadScene("MainMenuScene"));
+        restartButton.onClick.AddListener(() => SceneController.Instance.LoadActiveScene());
 
         contentPanel.SetActive(false);
     }

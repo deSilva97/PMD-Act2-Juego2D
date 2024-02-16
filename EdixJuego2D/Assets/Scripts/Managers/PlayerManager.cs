@@ -15,12 +15,9 @@ public class PlayerManager : MonoBehaviour
             instance = this;
         else Destroy(gameObject);
     }
-
-    [SerializeField] int extraLifes = 3;
-
+    [SerializeField] private int extraLifes = 3;
     private int currentExtraLifes;
     private bool currentKey;
-    private int currentCoins;
     private int currentChestOpen;
 
     public static event Action<int> onExtraLifesChanges;
@@ -32,7 +29,6 @@ public class PlayerManager : MonoBehaviour
     {
         setExtraLifes(extraLifes);
         setKey(false);
-        //setCoins(0);
         setChests(0);
     }
 
@@ -54,7 +50,7 @@ public class PlayerManager : MonoBehaviour
     public void setExtraLifes(int value)
     {
         currentExtraLifes = value;
-        onExtraLifesChanges.Invoke(value);
+        onExtraLifesChanges?.Invoke(value);
     }
 
 }

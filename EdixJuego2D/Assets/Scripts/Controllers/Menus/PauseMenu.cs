@@ -69,7 +69,7 @@ public class PauseMenu : Menu
     private void HandleNewGame()
     {
         TimeManager.Resume();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
+        SceneController.Instance.LoadActiveScene();        
     }
 
     private void HandleContinue()
@@ -87,7 +87,7 @@ public class PauseMenu : Menu
     private void HandleExit()
     {
         Close();
-        SceneManager.LoadScene(0);
+        SceneController.Instance.LoadScene("MainMenuScene");
     }
 
 }

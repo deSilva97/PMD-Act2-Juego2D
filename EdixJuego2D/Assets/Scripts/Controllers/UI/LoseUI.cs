@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LoseUI : MonoBehaviour
@@ -22,8 +23,8 @@ public class LoseUI : MonoBehaviour
 
     private void Start()
     {
-        restartButton.onClick.AddListener(() => GameManager.Instance.ChangeState(GameState.Gameplay));
-        backButton.onClick.AddListener(() => GameManager.Instance.ChangeState(GameState.Main));
+        restartButton.onClick.AddListener(() => SceneController.Instance.LoadActiveScene());
+        backButton.onClick.AddListener(() => SceneController.Instance.LoadScene("MainMenuScene"));
 
         contentPanel.SetActive(false);
     }

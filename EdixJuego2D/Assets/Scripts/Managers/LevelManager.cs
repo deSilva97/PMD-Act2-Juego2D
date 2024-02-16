@@ -67,26 +67,26 @@ public class LevelManager : MonoBehaviour
 
     private int CompareInts(int a, int b) => (a > b) ? a : b;
 
-    public void SaveLevel(Level level)
+    public static void SaveLevel(Level level)
     {
-        PlayerPrefs.SetInt(level.id + "score", level.score);
-        PlayerPrefs.SetInt(level.id + "stars", level.stars);
-        PlayerPrefs.SetInt(level.id + "complete", Convert.ToInt16(1));
+        PlayerPrefs.SetInt("lvl" + level.id + "score", level.score);
+        PlayerPrefs.SetInt("lvl" + level.id + "stars", level.stars);
+        PlayerPrefs.SetInt("lvl" + level.id + "complete", Convert.ToInt16(1));
     }
 
-    public Level LoadLevel(int buildIndex)
+    public static Level LoadLevel(int buildIndex)
     {
         Level lvl = new Level();
-        lvl.id = "Level_" + buildIndex;
-        lvl.score = PlayerPrefs.GetInt(lvl.id + "score", 0);
-        lvl.stars = PlayerPrefs.GetInt(lvl.id + "stars", 0);
-        lvl.complete = Convert.ToBoolean(PlayerPrefs.GetInt(lvl.id + "complete", 0));
+        lvl.id = buildIndex;
+        lvl.score = PlayerPrefs.GetInt("lvl" + lvl.id + "score", 0);
+        lvl.stars = PlayerPrefs.GetInt("lvl" + lvl.id + "stars", 0);
+        lvl.complete = Convert.ToBoolean(PlayerPrefs.GetInt("lvl" + lvl.id + "complete", 0));
         return lvl;
     }
 
     public class Level
     {
-        public string id;
+        public int id;
         public int score;
         public int stars;
         public bool complete;
