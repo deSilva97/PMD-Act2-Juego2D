@@ -15,6 +15,6 @@ public class CoinController : Pickeable
     public new void PickUp()
     {
         base.PickUp();
-        PlayerManager.Instance.setCoins(PlayerManager.Instance.getCoins() + value);
+        LevelManager.Instance.AddPoints(value);
     }
 }

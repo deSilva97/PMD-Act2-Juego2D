@@ -99,7 +99,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     public void SetDead(float time = 0)
     {
         onEnemyDie?.Invoke(this);
-        PlayerManager.Instance.setCoins(PlayerManager.Instance.getCoins() + myData.Points);
+        LevelManager.Instance.AddPoints(myData.Points);
         Destroy(gameObject);
     }
 

@@ -1,35 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PauseMenu : PausableMenu
+public class PauseMenu : Menu
 {
+    [Header("Inputs")]
+    [SerializeField] protected KeyCode inputKey;
+    [SerializeField] protected Button inputButton;
+
+    [Header("Content")]
+    [SerializeField] protected GameObject content;
+
     [Header("References")]
     [SerializeField] Button newGameButton;
     [SerializeField] Button continueGameButton;
     [SerializeField] Button settingsButton;
     [SerializeField] Button exitButton;
-    protected new void Start()
+
+    public bool isOpen { get; protected set; }
+
+    protected void Start()
     {
-        base.Start();
-        
+        if (inputButton != null)
+            inputButton.onClick.AddListener(HandleInputs);
+
         setListeners();
-        
+
         Close();
+    }
+
+    protected void Update()
+    {
+        if (Input.GetKeyDown(inputKey))
+            HandleInputs();
+    }
+
+    protected void HandleInputs()
+    {
+        if (isOpen)
+            HandleContinue();
+        else Open();
     }
 
     public override void Open()
     {
+        isOpen = true;
         TimeManager.Pause();
         content.SetActive(true);
     }
 
     public override void Close()
     {
-        TimeManager.Resume();
         content.SetActive(false);
     } 
 
@@ -43,13 +68,14 @@ public class PauseMenu : PausableMenu
 
     private void HandleNewGame()
     {
-        Debug.Log("Nueva partida");
-        SceneManager.LoadScene(1);        
+        TimeManager.Resume();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);        
     }
 
     private void HandleContinue()
     {
         isOpen = false;
+        TimeManager.Resume();
         Close();
     }
 

@@ -24,7 +24,7 @@ public class PlayerHUD : MonoBehaviour
     {
         PlayerController.onPlayerLifeChange += SetLifeBar;
         PlayerManager.onExtraLifesChanges += UpdateTries;
-        PlayerManager.onCoinPicked += SetPoints;
+        LevelManager.onPointAdded += SetPoints;
         PlayerManager.onKeyPicked += ShowKey;
         PlayerManager.onChestOpened += SetChestAlpha;
     }
@@ -33,7 +33,7 @@ public class PlayerHUD : MonoBehaviour
     {
         PlayerController.onPlayerLifeChange -= SetLifeBar;
         PlayerManager.onExtraLifesChanges -= UpdateTries;
-        PlayerManager.onCoinPicked -= SetPoints;
+        LevelManager.onPointAdded -= SetPoints;
         PlayerManager.onKeyPicked -= ShowKey;
         PlayerManager.onChestOpened -= SetChestAlpha;
     }
@@ -54,9 +54,9 @@ public class PlayerHUD : MonoBehaviour
         currentLife.fillAmount = dif;
     }
 
-    private void SetPoints(int value)
+    private void SetPoints(int currentValue, int amount)
     {
-        points.text = "x " + value.ToString();
+        points.text = "x " + currentValue.ToString();
     }
 
     private void SetChestAlpha(int number)

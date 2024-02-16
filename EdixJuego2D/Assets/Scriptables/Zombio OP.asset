@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f24cb1eb2fbd1aa4dbc401fae03074d6, type: 3}
   m_Name: Zombio OP
   m_EditorClassIdentifier: 
-  health: 100
-  moveSpeed: 5
-  jumpStrength: 10
+  health: 11
+  moveSpeed: 1
+  jumpStrength: 0
   intervalAttack: 2
   damage: 2
-  points: 100
+  points: 112

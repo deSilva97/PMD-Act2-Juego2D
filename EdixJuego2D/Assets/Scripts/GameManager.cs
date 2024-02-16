@@ -41,5 +41,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Reset Player Prefs")]
+    public void ResetPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 
 }

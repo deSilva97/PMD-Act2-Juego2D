@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyController : MonoBehaviour
+public class KeyController : Pickeable
 {
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!PlayerManager.Instance.getKey())
-            pick();
-        
+        PickUp();
     }
 
-    public void pick()
+    public new void PickUp()
     {
-        gameObject.SetActive(false);
+        base.PickUp();        
         PlayerManager.Instance.setKey(true);
     }
 }

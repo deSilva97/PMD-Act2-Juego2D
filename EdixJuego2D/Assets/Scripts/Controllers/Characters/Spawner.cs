@@ -56,18 +56,11 @@ public class Spawner : MonoBehaviour
         {
             yield return new WaitForSeconds(timer);
 
-            Debug.Log(gameObject.name + " ha superado la barrera de tiempo");
-
             while (myList.Count >= maxInstances)
                 yield return new WaitForEndOfFrame();
 
-
-            Debug.Log(gameObject.name + " ha superado la barrera de máximas instancias");
-
             while (Vector2.Distance(Camera.main.transform.position, transform.position) < minDistanceToSpawn)
                 yield return new WaitForEndOfFrame();
-
-            Debug.Log(gameObject.name + " ha superado la barrera de Distancia necesaria");
 
             Spawn();
         }

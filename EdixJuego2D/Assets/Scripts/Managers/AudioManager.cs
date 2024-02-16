@@ -44,6 +44,6 @@ public class AudioManager : MonoBehaviour
     public static void SaveMusicVolume(float value) => PlayerPrefs.SetFloat(nameof(MIXER_MUSIC), value);
     public static void SaveSFXVolume(float value) => PlayerPrefs.SetFloat(nameof(MIXER_SFX), value);
 
-    public static float LoadMusicVolume() => PlayerPrefs.GetFloat(nameof(MIXER_MUSIC), -15);
-    public static float LoadSFXVolume() => PlayerPrefs.GetFloat(nameof(MIXER_SFX), -15);
+    public static float LoadMusicVolume() => PlayerPrefs.GetFloat(nameof(MIXER_MUSIC), 0.25f);
+    public static float LoadSFXVolume() => PlayerPrefs.GetFloat(nameof(MIXER_SFX), 0.3f);
 }

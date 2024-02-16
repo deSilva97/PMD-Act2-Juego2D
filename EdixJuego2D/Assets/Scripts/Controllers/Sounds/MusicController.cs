@@ -88,7 +88,6 @@ public class MusicController : MonoBehaviour
 
     public void StopAndPlay(AudioClip clip)
     {
-        Debug.Log("Se va a: " + clip.name);
         StopAllCoroutines();
 
         if (clip != null)

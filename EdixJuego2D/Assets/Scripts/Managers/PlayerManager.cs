@@ -26,14 +26,13 @@ public class PlayerManager : MonoBehaviour
     public static event Action<int> onExtraLifesChanges;
     public static event Action<int> onLifesChanges;
     public static event Action<bool> onKeyPicked;
-    public static event Action<int> onCoinPicked;
     public static event Action<int> onChestOpened;
 
     private void Start()
     {
         setExtraLifes(extraLifes);
         setKey(false);
-        setCoins(0);
+        //setCoins(0);
         setChests(0);
     }
 
@@ -43,13 +42,7 @@ public class PlayerManager : MonoBehaviour
         currentKey = value;
         onKeyPicked?.Invoke(value);
     }
-
-    public int getCoins() => currentCoins;
-    public void setCoins(int value)
-    {
-        currentCoins = value;
-        onCoinPicked?.Invoke(value);
-    }
+    
     public int getChests() => currentChestOpen;
     public void setChests(int value)
     {

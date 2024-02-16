@@ -15,6 +15,6 @@ MonoBehaviour:
   health: 3
   moveSpeed: 2
   jumpStrength: 8
-  intervalAttack: 0.1
+  intervalAttack: 1.2
   damage: 1
   points: 10

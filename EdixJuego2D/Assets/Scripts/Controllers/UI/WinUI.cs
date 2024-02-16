@@ -10,6 +10,8 @@ public class WinUI : MonoBehaviour
     [SerializeField] GameObject contentPanel;
     [Space]
     [SerializeField] Button continueButton;
+    [SerializeField] Button restartButton;
+
 
     private void OnEnable()
     {
@@ -24,7 +26,8 @@ public class WinUI : MonoBehaviour
     private void Start()
     {
         continueButton.onClick.AddListener(() => GameManager.Instance.ChangeState(GameState.Main));
-        
+        restartButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
+
         contentPanel.SetActive(false);
     }
 
