@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     [SerializeField] EntityMovement myMovment;
     [SerializeField] Animator myAnim;
     [SerializeField] EntityAttack myAttack;
-
+    [SerializeField] EnemyTriggerPlayer myDetector; 
     [SerializeField] EnemyHUD myHUD;
 
     Transform target;

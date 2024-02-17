@@ -8,6 +8,8 @@ public class LevelManager : MonoBehaviour
     private static LevelManager instance;
     public static LevelManager Instance => instance;
 
+    public static int currentLevel { get; set; }
+
     public int currentPoints { get; private set; }
 
     public static event System.Action<int, int> onPointAdded;
@@ -27,7 +29,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-
         if (instance == null)
             instance = this;
         else Destroy(gameObject);
@@ -47,14 +48,16 @@ public class LevelManager : MonoBehaviour
 
     public void FinnishLevel()
     {
-        Level levelLoaded = LoadLevel(SceneManager.GetActiveScene().buildIndex);
-        Level levelToCompare = new Level();
-        Level levelToSave = new Level();
+        string scene = SceneManager.GetActiveScene().name;
+        string[] split = scene.Split(" ");
+        int id = Convert.ToInt32(split[1]);       
+
+        Level levelLoaded = LoadLevel(id);
+        Level levelToCompare = new Level(id);
+        Level levelToSave = new Level(id);
 
         levelToCompare.score = currentPoints;
         levelToCompare.stars = PlayerManager.Instance.getChests();
-
-        levelToSave.id = levelLoaded.id;
 
         levelToSave.score = CompareInts(levelToCompare.score, levelLoaded.score);
         onScoreCompareEnds?.Invoke(levelToCompare.score, levelLoaded.score);
@@ -76,20 +79,33 @@ public class LevelManager : MonoBehaviour
 
     public static Level LoadLevel(int buildIndex)
     {
-        Level lvl = new Level();
-        lvl.id = buildIndex;
+        Level lvl = new Level(buildIndex);
         lvl.score = PlayerPrefs.GetInt("lvl" + lvl.id + "score", 0);
         lvl.stars = PlayerPrefs.GetInt("lvl" + lvl.id + "stars", 0);
         lvl.complete = Convert.ToBoolean(PlayerPrefs.GetInt("lvl" + lvl.id + "complete", 0));
         return lvl;
     }
 
+    [System.Serializable]
     public class Level
     {
         public int id;
         public int score;
         public int stars;
         public bool complete;
+
+        public Level(int id)
+        {
+            this.id = id;
+        }
+
+        public Level(int id, int score, int stars, bool complete)
+        {
+            this.id = id;
+            this.score = score;
+            this.stars = stars;
+            this.complete = complete;
+        }
     }
 
 }

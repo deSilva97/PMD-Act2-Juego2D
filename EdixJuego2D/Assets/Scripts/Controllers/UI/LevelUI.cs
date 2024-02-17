@@ -18,6 +18,9 @@ public class LevelUI : MonoBehaviour
     [Space]
     [SerializeField] GameObject starContent;
     [SerializeField] GameObject[] starsContent;
+
+    public LevelManager.Level MyLevel { get { return myLevel; } }
+
     private void Start()
     {
         chooseLevelButton.onClick.AddListener(SelectLevel);
@@ -27,12 +30,14 @@ public class LevelUI : MonoBehaviour
     {
         myLevel = level;
 
-        iconLock.gameObject.SetActive(level.complete);
-        numberText.text = level.id.ToString();
+        iconLock.gameObject.SetActive(!level.complete);
 
+        numberText.text = level.id.ToString();
+        chooseLevelButton.gameObject.SetActive(myLevel.complete);
+        
         starContent.SetActive(level.complete);
 
-        for(int i = 0; i < starsContent.Length; i++)
+        for (int i = 0; i < starsContent.Length; i++)
         {
             if(i < level.stars) 
                 starsContent[i].SetActive(true);
@@ -41,10 +46,17 @@ public class LevelUI : MonoBehaviour
         
     }
 
+    public void CanClickButton()
+    {
+        chooseLevelButton.gameObject.SetActive(true);
+        iconLock.gameObject.SetActive(false);
+    }
+
     private void SelectLevel()
     {
-        Debug.Log(myLevel.id);
-        Debug.Log("Se va a cargar la escena " + SceneManager.GetSceneByBuildIndex(myLevel.id));
-        SceneController.Instance.LoadScene("SampleScene");
+        Debug.Log("Cargando nivel: Level" + myLevel.id);
+        LevelManager.currentLevel = myLevel.id;
+        SceneController.Instance.LoadScene("Level " + myLevel.id);
     }
+
 }

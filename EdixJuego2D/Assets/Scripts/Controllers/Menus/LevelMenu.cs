@@ -6,20 +6,33 @@ using UnityEngine.SceneManagement;
 public class LevelMenu : Menu
 {
     [SerializeField] GameObject content;
-
     [SerializeField] LevelUI[] levels;
-
-    [SerializeField] int buildIndexLevelStart = 1;
 
     private void Start()
     {
+
+        //LevelManager.SaveLevel(new LevelManager.Level(2, 100, 0, true));
+        //LevelManager.SaveLevel(new LevelManager.Level(3, 20, 2, true));
+
         Close();
 
         for(int i = 0; i < levels.Length; i++)
         {
             levels[i].SetLevel(LevelManager.LoadLevel(i + 1));
         }
-            
+         
+        foreach(var level in levels)
+        {
+            if (!level.MyLevel.complete)
+            {
+                Debug.Log("Level" + level.MyLevel.id);
+                level.CanClickButton();
+                return;
+            }
+        }
+
+
+
     }
 
     public override void Close()
