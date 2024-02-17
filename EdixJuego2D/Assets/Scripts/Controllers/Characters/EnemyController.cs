@@ -11,10 +11,9 @@ public class EnemyController : MonoBehaviour, IDamageable
     [SerializeField] EntityMovement myMovment;
     [SerializeField] Animator myAnim;
     [SerializeField] EntityAttack myAttack;
-    [SerializeField] EnemyTriggerPlayer myDetector; 
     [SerializeField] EnemyHUD myHUD;
 
-    Transform target;
+    public Transform target { get; set; }
     SpriteRenderer spr;
 
     public int currentLife { get; private set; }
@@ -36,7 +35,7 @@ public class EnemyController : MonoBehaviour, IDamageable
         myMovment.SetJumpStrength(myData.JumpStrength); 
         isAlive = true;
 
-        EnemyAtRange(FindAnyObjectByType<PlayerController>().transform);
+        //EnemyAtRange(FindAnyObjectByType<PlayerController>().transform);
     }
 
     private void Update()
@@ -105,9 +104,10 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public void EnemyAtRange(Transform target)
     {
+        canMove = false;
         if (this.target == target)
             return;
-            
+        
         this.target = target;
         transform.localScale = new Vector3((target.position.x < transform.position.x) ? -1 : 1, 1,1 );
         myHUD.SetNotify("!");

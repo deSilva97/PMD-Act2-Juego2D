@@ -9,27 +9,25 @@ public class EnemyTriggerPlayer : MonoBehaviour
     [Space]
     [SerializeField] float triggerRange = 5f;
     [SerializeField] float lostRange = 10f;
-    
-    bool following;
 
-    public Transform target { get; private set; }
+    PlayerController player;
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Start()
     {
-        if (collision.CompareTag(triggerTag))
-        {
-            target = collision.transform;
-        }
+        player = FindAnyObjectByType<PlayerController>();
     }
-
-
     private void Update()
     {
-        if (target == null)
-            return;
-
-        if (Vector3.Distance(target.position, transform.position) > lostRange)
-            target = null;
+        if (controller.target == null)
+        {
+            if (Vector3.Distance(player.transform.position, transform.position) < triggerRange)
+                controller.EnemyAtRange(player.transform);
+        }
+        else
+        {
+            if (Vector3.Distance(controller.target.transform.position, transform.position) > lostRange)
+                controller.target = null;
+        }
+          
     }
 }
