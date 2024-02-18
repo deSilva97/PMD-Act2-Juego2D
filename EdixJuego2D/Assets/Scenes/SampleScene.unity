@@ -2925,7 +2925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 147a10352dfedde44b57fb7e69c5a616, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extraLifes: 3
 --- !u!114 &503468611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8007,6 +8006,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a26300aa90eb09438a07a84ed3f2795, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputJump: 32
+  inputAttack: 120
 --- !u!1 &1644183061
 GameObject:
   m_ObjectHideFlags: 0
@@ -11438,6 +11439,16 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 149
     m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: 4.839e-41, g: 4.839e-41, b: 4.839e-41, a: 4.839e-41}
+  - m_RefCount: 0
+    m_Data: {r: 4.839e-41, g: 4.839e-41, b: 4.839e-41, a: 4.839e-41}
+  - m_RefCount: 0
+    m_Data: {r: 4.839e-41, g: 4.839e-41, b: 4.839e-41, a: 4.839e-41}
+  - m_RefCount: 0
+    m_Data: {r: 4.839e-41, g: 4.839e-41, b: 4.839e-41, a: 4.839e-41}
+  - m_RefCount: 0
+    m_Data: {r: 4.839e-41, g: 4.839e-41, b: 4.839e-41, a: 4.839e-41}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -12347,11 +12358,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2efcd6cb6802a3144b4bc328a7499e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: c04d11786fcf7b341be8eb22bd496fab, type: 2}
   myMovment: {fileID: 2063632383}
   myAttack: {fileID: 1553702975}
   myAnimator: {fileID: 2063632381}
-  maxLife: 10
-  reloadTime: 0.5
 --- !u!114 &2063632383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12377,6 +12387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b82d71bbd7e024387c691144ea7940, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   mixerGroup: {fileID: -1181189571180065897, guid: bd8d0a8eb78fb1441ac7476d19d2ccd1, type: 2}
   jump: {fileID: 4262625}
   attack: {fileID: 718514859}
