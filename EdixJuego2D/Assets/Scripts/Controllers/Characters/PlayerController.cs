@@ -6,24 +6,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
-    [Header("Inputs")]
-    [SerializeField] KeyCode inputJump = KeyCode.Space;
-    [SerializeField] KeyCode inputAttack = KeyCode.X;
-
+    [SerializeField] private Player data;
     [Header("References")]
-    [SerializeField] private EntityMovement myMovment;
-    [SerializeField] private EntityAttack myAttack;
+    [SerializeField] private CharacterMovment myMovment;
+    [SerializeField] private CharacterAttack myAttack;
     [SerializeField] private Animator myAnimator;
     
     //Events
     public static event Action<int, int> onPlayerLifeChange;
     public static event Action onPlayerDead;        
+    public static event Action onPlayerRespawn;
 
     public event Action onPlayerJump;
     public event Action onPlayerAttack;
 
-    [SerializeField] int maxLife = 11;
-    [SerializeField] float reloadTime = 1f;
+    //[SerializeField] int maxLife = 11;
+    //[SerializeField] float reloadTime = 1f;
     private bool reloading;
 
     public int currentLife { get; private set; }
@@ -45,38 +43,31 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        myMovment.SetMoveSpeed(5);
-        myMovment.SetJumpStrength(8);
+        myMovment.SetMoveSpeed(data.MoveSpeed);
+        myMovment.SetJumpStrength(data.JumpStrength);
 
         myMovment.onEntityJump = onPlayerJump;
         myAttack.onEntityAttack = onPlayerAttack;
 
         respawnPositon = transform.position;
+
+        PlayerManager.Instance.setExtraLifes(data.ExtraLifes);
+
         ReSpawn();
     }
 
-
-    private void Update()
-    {
-        if (!isAlive)
-            return;
-
-        Move();
-        Attack();
-    }
 
     private void ReSpawn()
     {
         transform.position = respawnPositon;
         isAlive = true;
-        SetLife(maxLife);
-        //SceneController.Instance.LoadActiveScene();
+        SetLife(data.Health);
     }
 
     public void SetLife(int value)
     {
         currentLife = value;
-        onPlayerLifeChange?.Invoke(currentLife, maxLife);
+        onPlayerLifeChange?.Invoke(currentLife, data.Health);
     }
 
   
@@ -119,13 +110,13 @@ public class PlayerController : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-    private void Attack()
+    public void Attack(bool input)
     {        
-        if (Input.GetKey(inputAttack) && !reloading)
+        if (input && !reloading)
         {
             onPlayerAttack?.Invoke();
 
-            StartCoroutine(Reload(reloadTime));
+            StartCoroutine(Reload(data.IntervalAttack));
             myAnimator.SetTrigger("attack");
             myAttack.SetDamageToList(1 * (int)GamePlayerSettings.currentAttackDamage);
         }
@@ -138,15 +129,17 @@ public class PlayerController : MonoBehaviour, IDamageable
         reloading = false;
     }
 
-    private void Move()
+    public void Move(float x, bool jumpInput)
     {
-        myMovment.Move(Input.GetAxisRaw("Horizontal"), GamePlayerSettings.currentMoveSpeedMultiplier);
-        if (Input.GetKey(inputJump))
+        myMovment.Move(x, GamePlayerSettings.currentMoveSpeedMultiplier);
+        if (jumpInput)
         {
             myMovment.Jump();
         }
             
     }
+
+    public void Jump() => myMovment.Jump();
 
     private void DesactivePlayer()
     {

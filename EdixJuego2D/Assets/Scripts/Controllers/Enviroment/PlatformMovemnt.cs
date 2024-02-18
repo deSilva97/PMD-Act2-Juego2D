@@ -63,7 +63,7 @@ public class PlatformMovemnt : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        EntityMovement instance = collision.collider.GetComponent<EntityMovement>();
+        CharacterMovment instance = collision.collider.GetComponent<CharacterMovment>();
         if (instance != null)
             instance.transform.parent = transform;
     }

@@ -3070,7 +3070,6 @@ MonoBehaviour:
   - {fileID: 1835143739}
   - {fileID: 1897100366}
   - {fileID: 1536353219}
-  buildIndexLevelStart: 1
 --- !u!1 &1966238783
 GameObject:
   m_ObjectHideFlags: 0

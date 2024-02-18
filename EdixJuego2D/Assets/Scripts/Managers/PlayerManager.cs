@@ -15,7 +15,6 @@ public class PlayerManager : MonoBehaviour
             instance = this;
         else Destroy(gameObject);
     }
-    [SerializeField] private int extraLifes = 3;
     private int currentExtraLifes;
     private bool currentKey;
     private int currentChestOpen;
@@ -27,7 +26,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        setExtraLifes(extraLifes);
         setKey(false);
         setChests(0);
     }
