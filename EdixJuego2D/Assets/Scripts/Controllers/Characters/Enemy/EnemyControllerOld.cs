@@ -140,7 +140,7 @@ public class EnemyControllerOld : MonoBehaviour, IDamageable
     public void Climb()
     {
         climbing = true;
-        myMovment.Jump();
+        myMovment.TryJump();
     }
 
     public void StopClimb() => climbing = false;

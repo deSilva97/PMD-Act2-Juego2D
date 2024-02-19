@@ -127,12 +127,12 @@ public class PlayerController : MonoBehaviour, IDamageable
         myMovment.Move(x, GamePlayerSettings.currentMoveSpeedMultiplier);
         if (jumpInput)
         {
-            myMovment.Jump();
+            myMovment.TryJump();
         }
             
     }
 
-    public void Jump() => myMovment.Jump();
+    public void Jump() => myMovment.TryJump();
 
     private void DesactivePlayer()
     {

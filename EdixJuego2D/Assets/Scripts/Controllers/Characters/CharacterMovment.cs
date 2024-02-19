@@ -51,7 +51,7 @@ public class CharacterMovment : MonoBehaviour
     {
         if (horizontalAxis != 0)
         {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right * horizontalAxis, raycastDistance, raycastLayerMask);
+            RaycastHit2D hit = Physics2D.Raycast(shoes.transform.position, Vector2.right * horizontalAxis, raycastDistance, raycastLayerMask);
             if (hit.collider != null)
             {
                 // Aquí puedes hacer cualquier otra acción cuando hay un choque, por ejemplo, imprimir el nombre del objeto chocado.
@@ -112,15 +112,21 @@ public class CharacterMovment : MonoBehaviour
         return value;
     }
 
-    public void Jump()
+    public void TryJump()
     {
         if (currentJump > 0 && shoes.isLanding)
         {
             currentJump--;
-            yMove = jumpStrength;
-            shoes.ForeceLandOff();
-            onEntityJump?.Invoke();
+            StartJump(jumpStrength);
         }
+    }
+
+    public void StartJump(float force)
+    {
+        yMove = force;
+        shoes.ForeceLandOff();
+        onEntityJump?.Invoke();
+
     }
 
     public void StopJump()
