@@ -920,6 +920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dynamic Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 485090139296742454, guid: 411a6ebd5f7b02f4499cb62047ae9852, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3357897091582445141, guid: 411a6ebd5f7b02f4499cb62047ae9852, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.5
@@ -3058,9 +3062,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5173495222450134796, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243430380559907545, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
+      propertyPath: speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243430380559907545, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243430380559907545, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
+      propertyPath: offset.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243430380559907545, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
+      propertyPath: offset.y
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7919562822431603421, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
       propertyPath: m_Radius
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7919562822431603421, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9054471193520319699, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
       propertyPath: m_Name

@@ -5,14 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(AudioSource))]
-public abstract class Pickeable : MonoBehaviour, IPickeable
+public abstract class Pickeable : MonoBehaviour
 {
 
-    Collider2D coll;
-    AudioSource source;
-    SpriteRenderer spr;
+    protected Collider2D coll;
+    protected AudioSource source;
+    protected SpriteRenderer spr;
 
-    Sprite sp;
+    protected Sprite sp;
 
     private void Awake()
     {
@@ -33,10 +33,10 @@ public abstract class Pickeable : MonoBehaviour, IPickeable
         spr.sprite = sp;
     }
 
-    public void PickUp()
+    public void PickUp(bool collider = false, Sprite sprite = null)
     {
-        coll.enabled = false;        
-        spr.sprite = null;
+        coll.enabled = collider;        
+        spr.sprite = sprite;
 
         source.Play();
     }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IPickeable
 {
-    public void PickUp();
+   
 }
