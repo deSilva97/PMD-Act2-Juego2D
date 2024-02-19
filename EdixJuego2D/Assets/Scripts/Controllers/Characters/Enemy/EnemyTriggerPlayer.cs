@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyTriggerPlayer : MonoBehaviour
 {
-    [SerializeField] EnemyController controller;
+    [SerializeField] EnemyControllerOld controller;
     [SerializeField] string triggerTag = "Player";
     [Space]
     [SerializeField] float triggerRange = 5f;

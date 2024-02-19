@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyInteract : MonoBehaviour
 {
-    [SerializeField] EnemyController controller;
+    [SerializeField] EnemyControllerOld controller;
     [SerializeField] float raycastDistance;
     [SerializeField] LayerMask layerMask;
     [SerializeField] float timeTryClimb = 1f;    

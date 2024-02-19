@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] EnemyController prefab; 
+    [SerializeField] EnemyControllerOld prefab; 
     [SerializeField] [Min(0)] int maxInstances = 1;
     [SerializeField] float timeToSpawn = 10f;
     [SerializeField] float minDistanceToSpawn = 10;
     [SerializeField] bool startAwake = true;
 
-    List<EnemyController> myList;
+    List<EnemyControllerOld> myList;
 
     float timer;
 
@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        myList = new List<EnemyController>();
+        myList = new List<EnemyControllerOld>();
         timer = startAwake? 0 : timeToSpawn;
         Recover();
     }
@@ -41,7 +41,7 @@ public class Spawner : MonoBehaviour
 
     private void Spawn()
     {
-        EnemyController e = Instantiate(prefab);
+        EnemyControllerOld e = Instantiate(prefab);
         e.transform.position = transform.position;
         e.onEnemyDie += ResolveEnemyDie;
 
@@ -66,7 +66,7 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    private void ResolveEnemyDie(EnemyController e)
+    private void ResolveEnemyDie(EnemyControllerOld e)
     {
         myList.Remove(e);
     }

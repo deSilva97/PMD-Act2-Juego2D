@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour, IDamageable 
+public class EnemyControllerOld : MonoBehaviour, IDamageable 
 {
     [SerializeField] Enemy myData;
     [Space]
@@ -24,7 +24,7 @@ public class EnemyController : MonoBehaviour, IDamageable
     bool reloading;
     private bool climbing;
 
-    public event Action<EnemyController> onEnemyDie;
+    public event Action<EnemyControllerOld> onEnemyDie;
 
     const float MIN_DISTANCE_STOP = .5f;
 
