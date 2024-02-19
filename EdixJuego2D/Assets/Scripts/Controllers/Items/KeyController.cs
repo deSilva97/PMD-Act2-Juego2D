@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class KeyController : Pickeable
 {
-
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         PickUp();
