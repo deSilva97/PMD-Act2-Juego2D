@@ -3062,34 +3062,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5173495222450134796, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7243430380559907545, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
-      propertyPath: speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7243430380559907545, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7243430380559907545, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
-      propertyPath: offset.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7243430380559907545, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
-      propertyPath: offset.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919562822431603421, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
-      propertyPath: m_Radius
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7919562822431603421, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9054471193520319699, guid: b02672292bc197345abe79c0dc0a5b51, type: 3}
       propertyPath: m_Name
       value: Key
@@ -3455,6 +3427,10 @@ PrefabInstance:
     - target: {fileID: 5430355540512036251, guid: 370bbdec03e6bf345b03d010b30d462a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5807122275346934556, guid: 370bbdec03e6bf345b03d010b30d462a, type: 3}
+      propertyPath: yLimits.y
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5867745080270554582, guid: 370bbdec03e6bf345b03d010b30d462a, type: 3}
       propertyPath: m_AnchorMax.y
