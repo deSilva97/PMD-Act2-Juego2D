@@ -11,12 +11,15 @@ public class PlayerHUD : MonoBehaviour
     //[SerializeField] Image currentLife;
     [SerializeField] Image[] hearths;
     [SerializeField] TextMeshProUGUI numberLifes;
-    [SerializeField] TextMeshProUGUI points;
+    [SerializeField] TextMeshProUGUI points;    
+
     [SerializeField] Image[] chests;
 
-    [Header("Params")]    
+    [Header("Stars")]    
     [SerializeField][Range(0, 1)] float alphaChests = .2f;
+    [Header("Life")]    
     [SerializeField] Sprite[] hearthSprites;
+
 
     private void OnEnable()
     {
@@ -61,7 +64,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void SetPoints(int currentValue, int amount)
     {
-        points.text = "x " + currentValue.ToString();
+        points.text = currentValue.ToString();
     }
 
     private void SetChestAlpha(int number)
