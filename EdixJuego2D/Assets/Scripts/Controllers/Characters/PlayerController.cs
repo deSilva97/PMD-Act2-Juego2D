@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] private Player data;
     [Header("References")]
     [SerializeField] private CharacterMovment myMovment;
-    [SerializeField] private CharacterAttack myAttack;
     [SerializeField] private Animator myAnimator;
     
     //Events
@@ -18,7 +17,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     public static event Action onPlayerRespawn;
 
     public event Action onPlayerJump;
-    public event Action onPlayerAttack;
 
     //[SerializeField] int maxLife = 11;
     //[SerializeField] float reloadTime = 1f;
@@ -47,7 +45,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         myMovment.SetJumpStrength(data.JumpStrength);
 
         myMovment.onEntityJump = onPlayerJump;
-        myAttack.onEntityAttack = onPlayerAttack;
 
         respawnPositon = transform.position;
 
@@ -114,13 +111,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     {        
         if (input && !reloading)
         {
-            onPlayerAttack?.Invoke();
-
             StartCoroutine(Reload(data.IntervalAttack));
             myAnimator.SetTrigger("attack");
-            myAttack.SetDamageToList(1 * (int)GamePlayerSettings.currentAttackDamage);
         }
-            
     }
     IEnumerator Reload(float time)
     {

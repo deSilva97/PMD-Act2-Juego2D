@@ -30,6 +30,6 @@ public class PlayerSounds : MonoBehaviour
     private void setListeners()
     {
         controller.onPlayerJump += () => jump.Play();
-        controller.onPlayerAttack += () => attack.Play();
+        //controller.onPlayerAttack += () => attack.Play();
     }
 }
