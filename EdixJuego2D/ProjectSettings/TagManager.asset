@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - Obstacle
   - Ground
+  - Crossable
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Killer
   - Ground
   - Interactive
-  - 
+  - Platform
   - 
   - 
   - 

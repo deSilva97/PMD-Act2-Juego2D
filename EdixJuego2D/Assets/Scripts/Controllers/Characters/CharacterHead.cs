@@ -8,6 +8,14 @@ public class CharacterHead : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        myMovment.StopJump();
+        if (collision.CompareTag("Crossable"))
+        {
+            Debug.Log("Cabeza: Objeto atravesable");
+        }
+        else
+        {
+            myMovment.StopJump();
+
+        }
     }
 }
