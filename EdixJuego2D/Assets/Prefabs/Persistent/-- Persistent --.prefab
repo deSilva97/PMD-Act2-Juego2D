@@ -202,7 +202,7 @@ MonoBehaviour:
   - {fileID: 5220858382274743950}
   - {fileID: 5599691350183085124}
   numberLifes: {fileID: 8279840910746149789}
-  points: {fileID: 0}
+  points: {fileID: 8099444041678904235}
   chests:
   - {fileID: 4115796535320227618}
   - {fileID: 5063741798942209160}

@@ -64,7 +64,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void SetLife(int value)
     {
         currentLife = value;
-        onPlayerLifeChange?.Invoke(currentLife, data.Health);
+
+        if (currentLife < 0) 
+            currentLife = 0;
+        else if (currentLife > data.MaxHealth) 
+            currentLife = data.MaxHealth;
+
+        onPlayerLifeChange?.Invoke(currentLife, data.MaxHealth);
     }
 
   

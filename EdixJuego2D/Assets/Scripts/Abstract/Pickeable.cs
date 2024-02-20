@@ -14,14 +14,14 @@ public abstract class Pickeable : MonoBehaviour
 
     protected Sprite sp;
 
-    private void Awake()
+    protected void Awake()
     {
         coll = GetComponent<Collider2D>();
         source = GetComponent<AudioSource>();
         spr = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
+    protected void Start()
     {
         sp = spr.sprite;
         Restart();
@@ -33,10 +33,10 @@ public abstract class Pickeable : MonoBehaviour
         spr.sprite = sp;
     }
 
-    public void PickUp(bool collider = false, Sprite sprite = null)
+    public void PickUp()
     {
-        coll.enabled = collider;        
-        spr.sprite = sprite;
+        coll.enabled = false;        
+        spr.sprite = null;
 
         source.Play();
     }

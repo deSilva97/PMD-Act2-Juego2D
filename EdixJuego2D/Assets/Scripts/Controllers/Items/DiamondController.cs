@@ -9,9 +9,9 @@ public class DiamondController : Pickeable
         PickUp();
     }
 
-    public void PickUp()
+    public new void PickUp()
     {
-        base.PickUp(false, null);
+        base.PickUp();
         PlayerManager.Instance.setChests(PlayerManager.Instance.getChests() + 1);
     }
 
