@@ -1,12 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Plataformer {
+namespace Game.Player {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovment : MonoBehaviour
     {
+        public event System.Action onPlayerJump;
+        public event Action onPlayerHitHead;        
+
+        public bool canMove = true;
+
         [Header("References")]
         private Rigidbody2D rb2d;
         private BoxCollider2D coll;
@@ -16,9 +22,9 @@ namespace Plataformer {
         private bool jumpInput;
 
         [Header("Movment")]
-        float horizontalMovment;
         [SerializeField] float horizontalSpeed;
         [SerializeField] float movmentSmooth;
+        float horizontalMovment;
 
         Vector3 speed = Vector3.zero;
 
@@ -50,6 +56,9 @@ namespace Plataformer {
 
         private bool isFalling;
 
+        [Header("Hit")]
+        [SerializeField] Vector2 bounceSpeed;
+
         public void SetMovmentInput(float inputValue) => movmentInput = inputValue * horizontalSpeed;
         public void SetJumpInput(bool condition) => jumpInput = condition;
 
@@ -61,7 +70,7 @@ namespace Plataformer {
 
         private void Start()
         {
-           //currentJumps = numberJumps;
+            currentJumps = numberJumps;            
         }
 
         private void Update()
@@ -73,8 +82,6 @@ namespace Plataformer {
             horizontalMovment = movmentInput * horizontalSpeed;
             if (jumpInput)
                 jumping = true;
-
-         
         }
 
         private void FixedUpdate()
@@ -85,7 +92,8 @@ namespace Plataformer {
 
             isHeading = Physics2D.OverlapBox(head.position, headDimension, 0f, headMask);
 
-            Move(horizontalMovment * Time.deltaTime, rb2d.velocity.y, jumping);
+            if(canMove)
+                Move(horizontalMovment * Time.deltaTime, rb2d.velocity.y, jumping);
 
             jumping = false;
 
@@ -100,7 +108,7 @@ namespace Plataformer {
 
             if (isHeading && !isFalling)
             {
-                Debug.Log("Head touch");
+                onPlayerHitHead?.Invoke();
                 y = 0;
                 rb2d.AddForce(new Vector2(0, -jumpStrenght), ForceMode2D.Impulse);
                 isFalling = true;
@@ -125,8 +133,10 @@ namespace Plataformer {
                 currentJumps--;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 isGrounded = false;
+                
                 rb2d.AddForce(Vector2.up * jumpStrenght, ForceMode2D.Impulse);
 
+                onPlayerJump?.Invoke();
             }
         }
 
@@ -136,8 +146,18 @@ namespace Plataformer {
             Vector3 scale = transform.localScale;
             scale.x *= -1;
             transform.localScale = scale;
+        }        
+        public void Bounce(Vector2 point)
+        {
+            Debug.Log("Bounce: " + point);
+            rb2d.velocity = new Vector2(bounceSpeed.x, jumpStrenght);
+            onPlayerJump?.Invoke();
         }
-
+        public void ReBounce(Vector2 point)
+        {
+            Debug.Log("Rebound: " + point);
+            rb2d.velocity = new Vector2(-bounceSpeed.x * point.x, bounceSpeed.y);
+        }
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red; 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace Plataformer
+namespace Game.Player
 {
     public class RegulableJump : MonoBehaviour
     {
