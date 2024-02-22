@@ -1,28 +1,59 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BreakablePlatform : MonoBehaviour
 {
+    public event Action<float, float> onBreak;
+
     [Header("References")]
-    [SerializeField] AudioSource audioSource;
     [SerializeField] GameObject mesh;
-    [SerializeField] Collider2D noTriggerCollider;
+    AudioSource audioSource;
+    Collider2D[] colliders;
 
     [Header("Breakable")]
     [SerializeField] float timeToBreak;
     [SerializeField] float timeToRecover;
-    [SerializeField] BreakablePlatform node;
+    [SerializeField] bool cancelable;
+    [SerializeField] bool isBreaked;
+    [SerializeField] bool isRecovering;
+
+    [Header("Audio")]
+    [SerializeField] AudioClip clipCollision;
+    [SerializeField] AudioClip clipBreak;
+
+    [Header("Nodes")]
+    [SerializeField] int id;
+    [SerializeField] BreakablePlatform linkedNode;
+    [SerializeField] float timeExtraToNode;
+
 
     float timer;
     Transform target;
 
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        colliders = GetComponents<Collider2D>();
+    }
+
+    private void Start()
+    {
+        if (linkedNode != null)
+            linkedNode.onBreak += (a, b) => Break(a, b + timeExtraToNode);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("coll: " + collision.collider.name);
         if (collision.collider.CompareTag("Player"))
         {
-            target = collision.transform;
+            if(target == null)
+            {
+               target = collision.transform;
+               PlayAudio(clipCollision);
+            }
         }
     }
 
@@ -30,7 +61,8 @@ public class BreakablePlatform : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            target = null;
+            if(cancelable)
+                target = null;
         }
     }
 
@@ -42,34 +74,64 @@ public class BreakablePlatform : MonoBehaviour
         {
             timer -= Time.deltaTime;
             if (timer <= 0)
-                Break();
+                Break(timeToBreak, timeToRecover);
         }
 
     }
 
     void SetUp(bool active)
     {
-        mesh.gameObject.SetActive(active);
-        noTriggerCollider.enabled = active;
+        isBreaked = !active;
+
+        mesh.SetActive (active);
+
+        for(int i = 0;i<colliders.Length; i++)
+        {
+            colliders[i].enabled = active;
+        }
+            
     }
 
-    private void Break()
+    public void Break(float timeToBreak, float timeToRecover)
     {
         timer = timeToBreak;
         target = null;
 
-        if (node != null)
-            node.Break();
+        PlayAudio(clipBreak);
 
-        audioSource.Play();
+        onBreak?.Invoke(timeToBreak, timeToRecover);
 
-        Invoke(nameof(Recover), timeToRecover);
+        StartCoroutine(Recover(timeToRecover));
 
         SetUp(false);
     }
 
-    private void Recover()
+    private void PlayAudio(AudioClip clip)
     {
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
+    IEnumerator Recover(float timeToRecover)
+    {
+        isRecovering = true;
+
+        yield return new WaitForSeconds(timeToRecover);
+
+        if(linkedNode != null)
+        {
+            while (linkedNode.isRecovering)
+            {
+                Debug.Log(gameObject.name + " esta esperando a " + linkedNode.name);
+                yield return new WaitForEndOfFrame();
+
+            }
+
+            yield return new WaitForSeconds(timeExtraToNode);
+
+        }
+
         SetUp(true);
+        isRecovering = false;
     }
 }
