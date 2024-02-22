@@ -8,24 +8,18 @@ public class LevelManager : MonoBehaviour
     private static LevelManager instance;
     public static LevelManager Instance => instance;
 
-    public static int currentLevel { get; set; }
-
-    public int currentPoints { get; private set; }
-
     public static event System.Action<int, int> onPointAdded;
 
     public static event Action<int, int> onScoreCompareEnds;
     public static event Action<int> onStarsCompareEnds;
 
-    private void OnEnable()
-    {
-        EndGameManager.onGameWin += FinnishLevel;        
-    }
+    public static event Action onGameWin;
+    public static event Action onGameLose;
 
-    private void OnDisable()
-    {
-        EndGameManager.onGameWin -= FinnishLevel;        
-    }
+    public static int currentLevel { get; set; }
+
+    public int currentPoints { get; private set; }
+
 
     private void Awake()
     {
@@ -45,6 +39,13 @@ public class LevelManager : MonoBehaviour
         currentPoints += value;
         onPointAdded?.Invoke(currentPoints, value);
     }
+    public void Win()
+    {
+        Debug.Log("Win Game " + currentLevel);
+        onGameWin?.Invoke();
+        FinnishLevel();
+    }
+    public void Lose() => onGameLose?.Invoke();
 
     public void FinnishLevel()
     {

@@ -11,7 +11,7 @@ public class PlayerEnemy : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player")){
-            PlayerControllerNew player = collision.gameObject.GetComponent<PlayerControllerNew>();
+            PlayerController player = collision.gameObject.GetComponent<PlayerController>();
 
             if (canBeHitted && collision.GetContact(0).normal.y <= -.9)
             {

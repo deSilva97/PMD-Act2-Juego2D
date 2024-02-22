@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using Game.Player;
 
 public class CameraFollowPlayer : MonoBehaviour
 {
@@ -16,10 +17,25 @@ public class CameraFollowPlayer : MonoBehaviour
 
     Vector3 position;
 
+    private void OnEnable()
+    {
+        LevelManager.onGameWin += CancelFollow;
+        LevelManager.onGameLose += CancelFollow;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.onGameWin -= CancelFollow;
+        LevelManager.onGameLose -= CancelFollow;
+    }
+
+    private void CancelFollow() => target = null;
+
     private void FixedUpdate()
     {
         if (target == null)
             return;
+
 
         if (Vector3.Distance(getTargetPosition(), transform.position) > minDistanceStop)
             position = Vector3.Lerp(transform.position, getTargetPosition() + getRelativePosition(), speed * Time.deltaTime);

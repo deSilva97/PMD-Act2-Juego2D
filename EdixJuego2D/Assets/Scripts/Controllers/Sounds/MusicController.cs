@@ -14,12 +14,9 @@ public class MusicController : MonoBehaviour
     [SerializeField] AudioClip audioWin;
     [SerializeField] AudioClip audioLose;
     [SerializeField] float timeBetweenClips = 1f;
-    [SerializeField] Form form = Form.Loop;
 
     int index;
     float timer;
-
-    bool canPlay;
 
     private void Awake()
     {
@@ -28,20 +25,18 @@ public class MusicController : MonoBehaviour
 
     private void OnEnable()
     {
-        EndGameManager.onGameWin += Win;
-        EndGameManager.onGameLose += Lose;
+        LevelManager.onGameWin += Win;
+        LevelManager.onGameLose += Lose;
     }
 
     private void OnDisable()
     {
-        EndGameManager.onGameWin -= Win;
-        EndGameManager.onGameLose -= Lose;
+        LevelManager.onGameWin -= Win;
+        LevelManager.onGameLose -= Lose;
     }
 
     private void Start()
     {
-        canPlay = true;
-
         source.loop = false;
 
         index = 0;

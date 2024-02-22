@@ -7,7 +7,7 @@ namespace Game.Player
     public class PlayerAudio : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] PlayerControllerNew playerController;
+        [SerializeField] PlayerController playerController;
         [SerializeField] PlayerMovment playerMovment;
         AudioSource audioSource;
 

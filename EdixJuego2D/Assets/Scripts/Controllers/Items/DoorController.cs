@@ -5,34 +5,31 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour
 {
-    [SerializeField] bool open = false;
-
     [SerializeField] GameObject uiContent;
+
+    [SerializeField] bool oneUse = true;
+    [SerializeField] bool isUsed;
 
     private void Start()
     {
         uiContent.SetActive(false);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (oneUse && !isUsed && PlayerManager.Instance.getKey())
+        {
+            isUsed = true;
+            LevelManager.Instance.Win();
+        }
+
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!open)
+        if (!isUsed)
         {
-            if (PlayerManager.Instance.getKey())
-            {
-                open = true;
-                OnTriggerStay2D(collision);
-            }
-            else
-            {
-                uiContent.SetActive(true);
-            }
-
-        }
-        else
-        {
-            EndGameManager.Instance.Win();
-            enabled = false;
+            uiContent.SetActive(true);
         }
     }
 

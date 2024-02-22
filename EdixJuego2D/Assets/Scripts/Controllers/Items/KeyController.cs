@@ -8,11 +8,11 @@ public class KeyController : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController p = collision.GetComponent<PlayerController>();
-        if (p != null)
+        if (collision.CompareTag("Player"))
+        {
             followTarget.target = collision.transform;
-
-        PickUp();
+            PickUp();
+        }
     }
 
     private void Update()

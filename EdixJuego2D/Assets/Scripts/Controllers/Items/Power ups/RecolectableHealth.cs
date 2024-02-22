@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utils.Animations;
+using Game.Player;
 
 public class RecolectableHealth : Pickeable
 {
@@ -25,13 +26,14 @@ public class RecolectableHealth : Pickeable
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         PlayerController player = collision.GetComponent<PlayerController>();
-            Debug.Log("hit");
+        
         if (player != null)
         {
-            Debug.Log("Player hit");
-            player.SetLife(player.currentLife + healthRestore);
+            player.RecoverLife(healthRestore);
             LevelManager.Instance.AddPoints(points);
+        
             anim.Stop();
+            
             PickUp();
         }
     }

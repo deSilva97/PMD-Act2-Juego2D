@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Game.Player;
 
 public class PlayerHUD : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.onPlayerLifeChange += SetLifeSprite;
+        PlayerController.onPlayerLifeChanges += SetLifeSprite;
         PlayerManager.onExtraLifesChanges += UpdateTries;
         LevelManager.onPointAdded += SetPoints;
         PlayerManager.onChestOpened += SetChestAlpha;
@@ -31,7 +32,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void OnDisable()
     {
-        PlayerController.onPlayerLifeChange -= SetLifeSprite;
+        PlayerController.onPlayerLifeChanges -= SetLifeSprite;
         PlayerManager.onExtraLifesChanges -= UpdateTries;
         LevelManager.onPointAdded -= SetPoints;
         PlayerManager.onChestOpened -= SetChestAlpha;

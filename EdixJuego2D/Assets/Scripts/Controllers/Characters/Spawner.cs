@@ -18,12 +18,12 @@ public class Spawner : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerController.onPlayerDead += () => canSpawn = false;
+        PlayerManager.onPlayerDead += StopSpawning;
     }
 
     private void OnDisable()
     {
-        PlayerController.onPlayerDead -= () => canSpawn = false;
+        PlayerManager.onPlayerDead -= StopSpawning;
     }
 
     private void Start()
@@ -50,6 +50,7 @@ public class Spawner : MonoBehaviour
         timer = timeToSpawn;
     }
 
+    private void StopSpawning() => canSpawn = false;
     IEnumerator SpawnSystem()
     {
         while (canSpawn)

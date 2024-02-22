@@ -9,7 +9,7 @@ public class CharacterShoes : MonoBehaviour
 
     bool reload = false;
 
-    public event System.Action onLand;
+    //public event System.Action onLand;
 
     private void OnTriggerStay2D(Collider2D collision)
     {

@@ -7,8 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static event Action<int> onExtraLifesChanges;
+    public static event Action<bool> onKeyPicked;
+    public static event Action<int> onChestOpened;
+    public static event Action onPlayerDead;
+
     private static PlayerManager instance;
     public static PlayerManager Instance => instance;
+
     private void Awake()
     {
         if (instance == null)
@@ -18,11 +24,6 @@ public class PlayerManager : MonoBehaviour
     private int currentExtraLifes;
     private bool currentKey;
     private int currentChestOpen;
-
-    public static event Action<int> onExtraLifesChanges;
-    public static event Action<int> onLifesChanges;
-    public static event Action<bool> onKeyPicked;
-    public static event Action<int> onChestOpened;
 
     private void Start()
     {

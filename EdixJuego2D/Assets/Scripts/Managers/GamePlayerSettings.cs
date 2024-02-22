@@ -5,7 +5,7 @@ using UnityEngine;
 public class GamePlayerSettings : MonoBehaviour
 {
     [SerializeField] [Min(0)] float moveSpeedMultiplier = 1;
-    [SerializeField] [Min(0)] int numberJumps = 1;
+    //[SerializeField] [Min(0)] int numberJumps = 1;
     [SerializeField][Min(0)] int attackDamage = 1;
 
     private void Start()

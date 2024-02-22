@@ -9,13 +9,13 @@ public class CameraAnimationController : MonoBehaviour
 
     private void OnEnable()
     {
-        EndGameManager.onGameLose += StartMove;
-        EndGameManager.onGameWin += StartMove;
+        LevelManager.onGameLose += StartMove;
+        LevelManager.onGameWin += StartMove;
     }
     private void OnDisable()
     {
-        EndGameManager.onGameLose -= StartMove;
-        EndGameManager.onGameWin -= StartMove;
+        LevelManager.onGameLose -= StartMove;
+        LevelManager.onGameWin -= StartMove;
     }
 
     private void StartMove() => StartCoroutine(IMoveDirection(distance, speed));
@@ -24,6 +24,8 @@ public class CameraAnimationController : MonoBehaviour
     {
         Vector3 finalPosition = transform.position + offset;
         Vector3 direction = (finalPosition - transform.position).normalized;
+
+        Debug.Log(finalPosition + "#" + transform.position);
 
         while(Vector3.Distance(finalPosition, transform.position) > .5f){
             transform.position += direction * speed * Time.deltaTime;

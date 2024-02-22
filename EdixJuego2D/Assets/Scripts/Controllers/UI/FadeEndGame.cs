@@ -21,14 +21,14 @@ public class FadeEndGame : MonoBehaviour
 
     private void OnEnable()
     {
-        EndGameManager.onGameWin += FadeIn;
-        EndGameManager.onGameLose += FadeIn;
+        LevelManager.onGameWin += FadeIn;
+        LevelManager.onGameLose += FadeIn;
     }
 
     private void OnDisable()
     {
-        EndGameManager.onGameWin -= FadeIn;
-        EndGameManager.onGameLose -= FadeIn;
+        LevelManager.onGameWin -= FadeIn;
+        LevelManager.onGameLose -= FadeIn;
     }
 
     public void FadeIn() => StartCoroutine(IFadeIn(0));

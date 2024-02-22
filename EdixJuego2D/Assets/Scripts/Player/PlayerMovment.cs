@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 
 namespace Game.Player {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerMovment : MonoBehaviour
+    public class PlayerMovment : MonoBehaviour, IBounceable
     {
         public event System.Action onPlayerJump;
         public event Action onPlayerHitHead;        
@@ -61,6 +61,8 @@ namespace Game.Player {
 
         public void SetMovmentInput(float inputValue) => movmentInput = inputValue * horizontalSpeed;
         public void SetJumpInput(bool condition) => jumpInput = condition;
+
+        public float GetJumpStrenght() => jumpStrenght;
 
         private void Awake()
         {
@@ -147,10 +149,10 @@ namespace Game.Player {
             scale.x *= -1;
             transform.localScale = scale;
         }        
-        public void Bounce(Vector2 point)
+        public void Bounce(Vector2 point, float strenght)
         {
             Debug.Log("Bounce: " + point);
-            rb2d.velocity = new Vector2(bounceSpeed.x, jumpStrenght);
+            rb2d.velocity = new Vector2(bounceSpeed.x, strenght);
             onPlayerJump?.Invoke();
         }
         public void ReBounce(Vector2 point)

@@ -15,12 +15,12 @@ public class WinUI : MonoBehaviour
 
     private void OnEnable()
     {
-        EndGameManager.onGameWin += Show;
+        LevelManager.onGameWin += Show;
     }
 
     private void OnDisable()
     {
-        EndGameManager.onGameWin -= Show;
+        LevelManager.onGameWin -= Show;
     }
 
     private void Start()

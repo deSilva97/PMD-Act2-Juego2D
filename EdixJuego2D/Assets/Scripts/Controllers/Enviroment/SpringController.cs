@@ -15,11 +15,11 @@ public class SpringController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        CharacterMovment controller = collision.GetComponent<CharacterMovment>();
+        IBounceable controller = collision.GetComponent<IBounceable>();
         if (controller != null)
         {
             anim.SetTrigger("action");
-            controller.StartJump(strenght);
+            controller.Bounce(Vector2.up, strenght);
         }
     }
 }
