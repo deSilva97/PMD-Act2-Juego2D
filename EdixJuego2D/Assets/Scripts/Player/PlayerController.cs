@@ -51,6 +51,7 @@ namespace Game.Player
        
         private void Update()
         {
+
             myMovment.canMove = !isStuned;
         }
 

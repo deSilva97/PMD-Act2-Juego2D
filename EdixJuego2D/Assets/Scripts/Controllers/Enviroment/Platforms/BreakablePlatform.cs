@@ -122,7 +122,6 @@ public class BreakablePlatform : MonoBehaviour
         {
             while (linkedNode.isRecovering)
             {
-                Debug.Log(gameObject.name + " esta esperando a " + linkedNode.name);
                 yield return new WaitForEndOfFrame();
 
             }

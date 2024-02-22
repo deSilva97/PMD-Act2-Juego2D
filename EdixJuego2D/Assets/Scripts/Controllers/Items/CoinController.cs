@@ -16,5 +16,6 @@ public class CoinController : Pickeable
     {
         base.PickUp();
         LevelManager.Instance.AddPoints(value);
+        GetComponent<Animator>().enabled = false;
     }
 }

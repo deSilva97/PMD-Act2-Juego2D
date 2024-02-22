@@ -6,6 +6,13 @@ public class KeyController : MonoBehaviour
 {
     [SerializeField] FollowTarget followTarget;
 
+    AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -31,7 +38,8 @@ public class KeyController : MonoBehaviour
     }
 
     public void PickUp()
-    {              
+    {
+        audioSource.Play();
         PlayerManager.Instance.setKey(true);
     }
 }

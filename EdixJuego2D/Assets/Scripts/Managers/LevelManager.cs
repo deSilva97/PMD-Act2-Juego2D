@@ -33,7 +33,11 @@ public class LevelManager : MonoBehaviour
         AddPoints(0);
         TimeManager.Resume();
     }
+    private void Update()
+    {
+        //Debug.Log("Valor del input: " + Input.GetAxis("Horizontal"));
 
+    }
     public void AddPoints(int value)
     {
         currentPoints += value;

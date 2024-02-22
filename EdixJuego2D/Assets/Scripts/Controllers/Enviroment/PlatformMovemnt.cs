@@ -63,15 +63,17 @@ public class PlatformMovemnt : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CharacterMovment instance = collision.collider.GetComponent<CharacterMovment>();
-        if (instance != null)
-            instance.transform.parent = transform;
+        collision.transform.parent = transform;
+
+        //CharacterMovment instance = collision.collider.GetComponent<CharacterMovment>();
+        //if (instance != null)
+        //    instance.transform.parent = transform;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.collider != null)
-            collision.transform.parent = null;
+        //if(collision.collider != null)
+        collision.transform.parent = null;
     }
 
     private void OnDrawGizmosSelected()
