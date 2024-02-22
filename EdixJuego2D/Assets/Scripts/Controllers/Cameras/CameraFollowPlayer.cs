@@ -33,6 +33,11 @@ public class CameraFollowPlayer : MonoBehaviour
 
     private void FixedUpdate()
     {
+       
+    }
+
+    private void Update()
+    {
         if (target == null)
             return;
 
@@ -46,7 +51,6 @@ public class CameraFollowPlayer : MonoBehaviour
 
         transform.position = position;
     }
-
 
     Vector3 getRelativePosition()
     {
