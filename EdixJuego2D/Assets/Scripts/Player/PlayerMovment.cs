@@ -36,7 +36,7 @@ namespace Game.Player {
         [SerializeField] LayerMask shoesMask;
         [SerializeField] Transform shoes;
         [SerializeField] Vector3 shoesDimension;
-        [SerializeField] bool isGrounded;
+        public bool isGrounded { get; private set; }
 
         int currentJumps;
 
@@ -151,7 +151,6 @@ namespace Game.Player {
         }        
         public void Bounce(Vector2 point, float strenght)
         {
-            Debug.Log("Bounce: " + point);
             rb2d.velocity = new Vector2(bounceSpeed.x, strenght);
             onPlayerJump?.Invoke();
         }

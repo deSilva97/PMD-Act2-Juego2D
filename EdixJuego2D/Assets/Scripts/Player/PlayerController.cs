@@ -8,12 +8,14 @@ namespace Game.Player
 {
     public class PlayerController : MonoBehaviour, IKilleable
     {        
-        public event Action onPlayerHit;
         public static event Action<int, int> onPlayerLifeChanges;
-        public static event Action onPlayerDeath;
+        public event Action<PlayerController, Vector2> onPlayerHit;
+        public event Action<PlayerController> onPlayerDeath;
 
         [Header("References")]
         [SerializeField] PlayerMovment myMovment;
+        [SerializeField] PlayerAnimation myAnimations;
+        [SerializeField] GameObject myMesh;
 
         [Header("Player")]
         [SerializeField] private int myLife;
@@ -51,8 +53,8 @@ namespace Game.Player
        
         private void Update()
         {
-
             myMovment.canMove = !isStuned;
+            myAnimations.Jumping(!myMovment.isGrounded);
         }
 
         public int Attack(Vector2 point)
@@ -77,7 +79,7 @@ namespace Game.Player
                 return;
 
             currentLife -= damage;
-            onPlayerHit?.Invoke();
+            onPlayerHit?.Invoke(this, point);
 
             if (currentLife <= 0)
                 Dead();
@@ -96,10 +98,16 @@ namespace Game.Player
             currentLife = 0;
             isAlive = false;
 
-            onPlayerDeath?.Invoke();
+            myMesh.SetActive(false);
 
+            onPlayerDeath?.Invoke(this);
+
+            Invoke(nameof(EndGame), 1f);
+        }
+
+        public void EndGame()
+        {
             LevelManager.Instance.Lose();
-
         }
 
         private void DisablePlayer()

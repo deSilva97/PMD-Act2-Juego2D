@@ -34,7 +34,7 @@ namespace Game.Player
             playerMovment.onPlayerHitHead += PlayHitHead;
         }
 
-        private void PlayHit() => Play(onHeadHit);
+        private void PlayHit(PlayerController p, Vector2 point) => Play(onHeadHit);
 
         private void PlayJump() => Play(onJump);
         private void PlayHitHead() => Play(onHeadHit);
