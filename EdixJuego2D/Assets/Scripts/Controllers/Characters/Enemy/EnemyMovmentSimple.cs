@@ -19,6 +19,8 @@ public class EnemyMovmentSimple : MonoBehaviour
     [SerializeField] LayerMask faceMask;
     [SerializeField] bool isFacing;
 
+    public float SetMoveSpeed(float value) => moveSpeed = value;
+
     private void Start()
     {
         canMove = startMoving;
@@ -56,4 +58,5 @@ public class EnemyMovmentSimple : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(face.position, faceDimension);
     }
+
 }

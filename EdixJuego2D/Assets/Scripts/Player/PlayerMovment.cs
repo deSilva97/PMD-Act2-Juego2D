@@ -32,13 +32,13 @@ namespace Game.Player {
 
         [Header("Jump")]
         [SerializeField] float jumpStrenght;
-        [SerializeField] [Min(1)] int numberJumps;
+        //[SerializeField] [Min(1)] int numberJumps;
         [SerializeField] LayerMask shoesMask;
         [SerializeField] Transform shoes;
         [SerializeField] Vector3 shoesDimension;
         public bool isGrounded { get; private set; }
 
-        int currentJumps;
+        //int currentJumps;
 
         private bool jumping;
 
@@ -72,7 +72,7 @@ namespace Game.Player {
 
         private void Start()
         {
-            currentJumps = numberJumps;            
+            //currentJumps = numberJumps;            
         }
 
         private void Update()
@@ -129,13 +129,12 @@ namespace Game.Player {
             if (isGrounded)
             {
                 isFalling = false;
-                currentJumps = numberJumps;
+                //currentJumps = numberJumps;
             }
                 
-            if(currentJumps > 0 && jumping)
+            if (/*currentJumps > 0 && */jumping && isGrounded)
             {
-                Debug.Log("Jump");
-                currentJumps--;
+                //currentJumps--;
                 rb2d.velocity = new Vector2(rb2d.velocity.x, 0);
                 isGrounded = false;
                 
@@ -154,7 +153,8 @@ namespace Game.Player {
         }        
         public void Bounce(Vector2 point, float strenght)
         {
-            rb2d.velocity = new Vector2(bounceSpeed.x, strenght);
+            //rb2d.velocity = new Vector2(bounceSpeed.x, strenght);
+            rb2d.velocity = new Vector2(rb2d.velocity.x, strenght);
             onPlayerJump?.Invoke();
         }
         public void ReBounce(Vector2 point)

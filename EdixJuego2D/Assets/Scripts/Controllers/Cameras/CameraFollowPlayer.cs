@@ -29,7 +29,7 @@ public class CameraFollowPlayer : MonoBehaviour
         LevelManager.onGameLose -= CancelFollow;
     }
 
-    private void CancelFollow() => target = null;
+    public void CancelFollow() => target = null;
 
     private void FixedUpdate()
     {

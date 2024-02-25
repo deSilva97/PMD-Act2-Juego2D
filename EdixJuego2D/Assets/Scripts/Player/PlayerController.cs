@@ -29,19 +29,6 @@ namespace Game.Player
         [SerializeField] float timeToStunRecover;
         [SerializeField] bool isStuned;
 
-
-        private void OnEnable()
-        {
-            LevelManager.onGameWin += DisablePlayer;
-            LevelManager.onGameLose += DisablePlayer;
-        }
-
-        private void OnDisable()
-        {
-            LevelManager.onGameWin -= DisablePlayer;
-            LevelManager.onGameLose -= DisablePlayer;
-        }
-
         private void Start()
         {
             isAlive = true;
@@ -81,7 +68,7 @@ namespace Game.Player
             currentLife -= damage;
             onPlayerHit?.Invoke(this, point);
 
-            if (currentLife <= 0)
+            if (currentLife <= 0 && isAlive)
                 Dead();
 
             onPlayerLifeChanges?.Invoke(currentLife, myLife);
@@ -117,6 +104,7 @@ namespace Game.Player
             GetComponent<Collider2D>().enabled = false;
             myMovment.enabled = false;
             myMovment.Stop();
+            Camera.main.GetComponent<CameraFollowPlayer>().CancelFollow();
             //this.enabled = false;
         }
 

@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BugKillerAnimator
+  m_Controller: {fileID: 9100000, guid: 924c35d5961555643a88e6ac3b8ed6b7, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 2ba09756f6cfd184183755a6faf291d4, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 4292b585f6a95424a8f380f63840c84f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 19e70c059a74f5b46b401f63ecdbdad9, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: f1602493c13808b43a33a65e472517c2, type: 2}
