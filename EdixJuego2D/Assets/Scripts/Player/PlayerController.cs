@@ -101,6 +101,7 @@ namespace Game.Player
             myMesh.SetActive(false);
 
             onPlayerDeath?.Invoke(this);
+            DisablePlayer();
 
             Invoke(nameof(EndGame), 1f);
         }
@@ -112,8 +113,11 @@ namespace Game.Player
 
         private void DisablePlayer()
         {
+            //gameObject.SetActive(false);
+            GetComponent<Collider2D>().enabled = false;
             myMovment.enabled = false;
-            this.enabled = false;
+            myMovment.Stop();
+            //this.enabled = false;
         }
 
         public void Stun() => isStuned = true;

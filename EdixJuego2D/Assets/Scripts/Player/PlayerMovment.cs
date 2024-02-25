@@ -162,6 +162,9 @@ namespace Game.Player {
             Debug.Log("Rebound: " + point);
             rb2d.velocity = new Vector2(-bounceSpeed.x * point.x, bounceSpeed.y);
         }
+
+        public void Stop() => rb2d.velocity  = Vector2.zero;
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red; 
