@@ -52,7 +52,7 @@ namespace Game.Player {
         [SerializeField] Transform head;
         [SerializeField] Vector3 headDimension;
         [SerializeField] LayerMask headMask;
-        [SerializeField] bool isHeading;
+        public bool isHeading { get; private set; }
 
         private bool isFalling;
 
@@ -84,6 +84,9 @@ namespace Game.Player {
             horizontalMovment = movmentInput * horizontalSpeed;
             if (jumpInput)
                 jumping = true;
+
+            if (isGrounded && isHeading)
+                Debug.Log("Aplastado");
         }
 
         private void FixedUpdate()

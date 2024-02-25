@@ -30,11 +30,11 @@ public class PlatformMovemnt : MonoBehaviour
 
         //timer = timeAtPoint;
 
-        transform.Translate(direction * Time.deltaTime * moveSpeed);
-
+        transform.position = Vector2.MoveTowards(transform.position, points[index].position, moveSpeed * Time.deltaTime);
+        //transform.Translate(direction * Time.deltaTime * moveSpeed);
         //transform.position = points[index].position;
 
-        if (Vector3.Distance(points[index].position, transform.position) < .2f)
+        if (Vector3.Distance(points[index].position, transform.position) < .1f)
         {
             ChangeDirection();
         }

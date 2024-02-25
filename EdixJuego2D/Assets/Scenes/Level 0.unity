@@ -15991,19 +15991,19 @@ PrefabInstance:
       objectReference: {fileID: 736113231}
     - target: {fileID: 2568907428484719765, guid: 4b1dd4d58abb720459a512faa2d1f4fa, type: 3}
       propertyPath: xLimits.x
-      value: -1.5
+      value: -17.25
       objectReference: {fileID: 0}
     - target: {fileID: 2568907428484719765, guid: 4b1dd4d58abb720459a512faa2d1f4fa, type: 3}
       propertyPath: xLimits.y
-      value: 34
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 2568907428484719765, guid: 4b1dd4d58abb720459a512faa2d1f4fa, type: 3}
       propertyPath: yLimits.x
-      value: -1.75
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2568907428484719765, guid: 4b1dd4d58abb720459a512faa2d1f4fa, type: 3}
       propertyPath: yLimits.y
-      value: 7.25
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2568907428484719765, guid: 4b1dd4d58abb720459a512faa2d1f4fa, type: 3}
       propertyPath: offsetVertical

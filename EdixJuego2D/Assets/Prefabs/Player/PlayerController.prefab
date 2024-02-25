@@ -5115,7 +5115,6 @@ MonoBehaviour:
   headMask:
     serializedVersion: 2
     m_Bits: 1024
-  isHeading: 0
   bounceSpeed: {x: 5, y: 5}
 --- !u!1 &4196245366532487354
 GameObject:

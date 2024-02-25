@@ -37,9 +37,11 @@ public class KeyController : MonoBehaviour
         
     }
 
-    public void PickUp()
+    public new void PickUp()
     {
+        GetComponent<Collider2D>().enabled = false;
         audioSource.Play();
+
         PlayerManager.Instance.setKey(true);
     }
 }
