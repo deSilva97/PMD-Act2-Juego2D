@@ -2,15 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovmentSimple : MonoBehaviour
+public class EnemyMovmentSimple : EnemyMovment
 {
-    [Header("Movment")]
-    [SerializeField] bool startMoving;
-    [SerializeField] bool moveLeft;
-    [SerializeField] float moveSpeed;
-
-    public bool canMove { get; set; }
-
     Vector2 direction;
 
     [Header("Face")]
@@ -19,11 +12,9 @@ public class EnemyMovmentSimple : MonoBehaviour
     [SerializeField] LayerMask faceMask;
     [SerializeField] bool isFacing;
 
-    public float SetMoveSpeed(float value) => moveSpeed = value;
 
     private void Start()
     {
-        canMove = startMoving;
         direction = transform.localScale;
     }
 

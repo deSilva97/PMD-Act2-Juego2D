@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public event Action<EnemyController> onEnemyDie;
+
     [Header("Data")]
     [SerializeField] Enemy data;
     [Header("References")]
     [SerializeField] PlayerEnemy myLife;
-    [SerializeField] EnemyMovmentSimple myMovment;
+    [SerializeField] EnemyMovment myMovment;
     [SerializeField] Animator myAnimator;
 
     [Header("Enemy")]
@@ -58,6 +61,7 @@ public class EnemyController : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpDeadStrenght, ForceMode2D.Impulse);
         GetComponent<Collider2D>().enabled = false;
         myAnimator.SetTrigger("dead");
+        onEnemyDie?.Invoke(this);
         Destroy(gameObject, 1f);
     }
 }

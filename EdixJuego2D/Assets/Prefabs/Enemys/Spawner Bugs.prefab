@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4540266145662781252}
   - component: {fileID: 3118160736783065002}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Spawner Bugs
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -47,5 +47,5 @@ MonoBehaviour:
   prefab: {fileID: 4349435418681851419, guid: 411a6ebd5f7b02f4499cb62047ae9852, type: 3}
   maxInstances: 1
   timeToSpawn: 5
-  minDistanceToSpawn: 8
+  minDistanceToSpawn: 15
   startAwake: 1

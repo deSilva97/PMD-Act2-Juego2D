@@ -82,7 +82,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7356810991906198209, guid: 8e9cc051ab4355d4597832fc17eae675, type: 3}
       propertyPath: canBeHitted
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8230162600439042312, guid: 8e9cc051ab4355d4597832fc17eae675, type: 3}
       propertyPath: faceDimension.y

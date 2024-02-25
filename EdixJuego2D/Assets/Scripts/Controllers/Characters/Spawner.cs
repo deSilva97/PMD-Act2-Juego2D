@@ -10,7 +10,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] float minDistanceToSpawn = 10;
     [SerializeField] bool startAwake = true;
 
-    List<EnemyController> myList;
+    protected List<EnemyController> myList;
 
     float timer;
 
@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
         PlayerManager.onPlayerDead -= StopSpawning;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         myList = new List<EnemyController>();
         timer = startAwake? 0 : timeToSpawn;
@@ -39,11 +39,11 @@ public class Spawner : MonoBehaviour
         StartCoroutine(SpawnSystem());
     }
 
-    private void Spawn()
+    protected virtual void Spawn()
     {
         EnemyController e = Instantiate(prefab);
         e.transform.position = transform.position;
-        //e.onEnemyDie += ResolveEnemyDie;
+        e.onEnemyDie += ResolveEnemyDie;
 
         myList.Add(e);
 

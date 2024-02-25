@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f24cb1eb2fbd1aa4dbc401fae03074d6, type: 3}
-  m_Name: Zombio OP
+  m_Name: Fly
   m_EditorClassIdentifier: 
-  health: 11
-  moveSpeed: 1
-  jumpStrength: 0
-  intervalAttack: 2
-  damage: 2
-  points: 112
+  health: 1
+  damage: 1
+  moveSpeed: 6
+  timeStuned: 0.5
+  points: 8
