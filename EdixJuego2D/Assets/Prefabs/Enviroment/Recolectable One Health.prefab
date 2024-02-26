@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3057778543044138529}
   - component: {fileID: 2492061254151342679}
   - component: {fileID: 378810113273530205}
-  - component: {fileID: 8124816567597236194}
+  - component: {fileID: 3354413884344036533}
   m_Layer: 0
-  m_Name: Recolectable full hearth
+  m_Name: Recolectable One Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -231,9 +231,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46223786c0119774a9c24883ac06b9c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 100
+  points: 12
   healthRestore: 2
---- !u!114 &8124816567597236194
+--- !u!114 &3354413884344036533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,8 +242,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5114347779106939340}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4e8e288d021cdc46abafb5b549cad76, type: 3}
+  m_Script: {fileID: 11500000, guid: 21d9e73cbecc6d2449a8dcc1f44009d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateDirection: {x: 0, y: 1, z: 0}
-  speed: 5
+  playOnStart: 0
+  finalScale: {x: 1.25, y: 1.25, z: 1.25}
+  speed: 1
