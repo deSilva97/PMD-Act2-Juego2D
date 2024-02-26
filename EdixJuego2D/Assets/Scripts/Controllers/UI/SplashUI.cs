@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.iOS;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -14,13 +14,14 @@ public class SplashUI : MonoBehaviour
     [SerializeField] RawImage myImage;
     [SerializeField] VideoPlayer gif;
     [Header("Timer")]
-    [SerializeField] float timePlaying = 3;
     [SerializeField] float speedFadeOut = 1;
     
 
     IEnumerator Start()
     {
         gameObject.SetActive(!firstTime);
+
+        firstTime = false;
 
         if (!firstTime)
         {
@@ -36,6 +37,8 @@ public class SplashUI : MonoBehaviour
             myImage.color = color;
             yield return new WaitForEndOfFrame();
         }
+
+        SceneManager.LoadScene("MainMenuScene");
 
         gameObject.SetActive(false);
     }

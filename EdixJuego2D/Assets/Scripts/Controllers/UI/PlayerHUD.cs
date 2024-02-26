@@ -25,7 +25,6 @@ public class PlayerHUD : MonoBehaviour
     private void OnEnable()
     {
         PlayerController.onPlayerLifeChanges += SetLifeSprite;
-        PlayerManager.onExtraLifesChanges += UpdateTries;
         LevelManager.onPointAdded += SetPoints;
         PlayerManager.onChestOpened += SetChestAlpha;
     }
@@ -33,7 +32,6 @@ public class PlayerHUD : MonoBehaviour
     private void OnDisable()
     {
         PlayerController.onPlayerLifeChanges -= SetLifeSprite;
-        PlayerManager.onExtraLifesChanges -= UpdateTries;
         LevelManager.onPointAdded -= SetPoints;
         PlayerManager.onChestOpened -= SetChestAlpha;
     }
@@ -79,9 +77,4 @@ public class PlayerHUD : MonoBehaviour
             chests[i].color = new Color(chests[i].color.r, chests[i].color.g, chests[i].color.b, (i < number) ? 1: alphaChests);
         }
     }
-    private void UpdateTries(int value)
-    {
-        numberLifes.text = "x" + value;
-    }
-
 }
