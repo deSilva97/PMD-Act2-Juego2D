@@ -159,7 +159,6 @@ namespace Game.Player {
         }
         public void ReBounce(Vector2 point)
         {
-            Debug.Log("Rebound: " + point);
             rb2d.velocity = new Vector2(-bounceSpeed.x * point.x, bounceSpeed.y);
         }
 

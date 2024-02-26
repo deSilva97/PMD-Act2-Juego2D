@@ -53,20 +53,6 @@ public class SceneController : MonoBehaviour
 
     IEnumerator LoadLevelASync(string levelToLoad)
     {
-
-        //--Delete me >
-        /*
-        float smallTimer = 0;
-        float smallTimerMax = 1.5f;
-        while(smallTimer < smallTimerMax)
-        {
-            smallTimer += Time.deltaTime;
-            loadingImage.fillAmount = smallTimer / smallTimerMax;
-            yield return new WaitForEndOfFrame();
-        }
-        loadingImage.fillAmount = 0;
-        //--Delete me <
-        */
         AsyncOperation loadOperation = SceneManager.LoadSceneAsync(levelToLoad);
         while (loadOperation.progress < .8f)
         {
