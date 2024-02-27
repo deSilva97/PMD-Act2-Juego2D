@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 919048749439686722, guid: c0e40f71d41cd8c429c9531b47616dfc, type: 3}
       propertyPath: m_Size.x
-      value: 2.79
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1716786189431726627, guid: c0e40f71d41cd8c429c9531b47616dfc, type: 3}
       propertyPath: clipBreak
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7112309734611524578, guid: c0e40f71d41cd8c429c9531b47616dfc, type: 3}
       propertyPath: m_Size.x
-      value: 2.79
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7294467242585471967, guid: c0e40f71d41cd8c429c9531b47616dfc, type: 3}
       propertyPath: m_Name

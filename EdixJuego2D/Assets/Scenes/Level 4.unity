@@ -7199,68 +7199,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7830815650471210649, guid: a64be03417716ee4c92195710b41ffae, type: 3}
   m_PrefabInstance: {fileID: 1470076832}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1476946983
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1885907680}
-    m_Modifications:
-    - target: {fileID: 1226256254032207382, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_Name
-      value: Recolectable Poison Health (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -12.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
---- !u!4 &1476946984 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1896710990236868173, guid: 413d73e2761fe9a4fbd233214c8f2aa1, type: 3}
-  m_PrefabInstance: {fileID: 1476946983}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1479782608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9039,7 +8977,6 @@ Transform:
   - {fileID: 2131857779}
   - {fileID: 1531763232}
   - {fileID: 1467405867}
-  - {fileID: 1476946984}
   m_Father: {fileID: 1597172187}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1907567434
